@@ -12,6 +12,7 @@ console.log("start");
 let scores = [0, 0];
 let activeScores = 0;
 let activePlayer = 0;
+let doubleSix = false;
 
 // console.log(dice)
 // document.querySelector("#current-" + activePlayer).textContent = dice
@@ -39,6 +40,12 @@ bottomRoll.addEventListener('click', function () {
         console.log("1 rolled");
         nextPlayer();
     } else {
+        if (dice == 6){
+            if (doubleSix){
+                looseScore()
+            }
+            doubleSix = true
+        }
         activeScores += dice;
 
         if (activePlayer == 0) {
@@ -116,5 +123,18 @@ function changeActiveState() {
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
     document.querySelector('.dice').style.display = 'none'
+}
+function looseScore() {
+    console.log('loosing score');
+    activeScores = 0;
+    if (activePlayer == 0) {
+        scores[0] = 0;
+        score0.textContent = scores[0].toString();
+        current0.textContent = '0';
+    } else {
+        scores[1] = 0;
+        score1.textContent = scores[1].toString();
+        current1.textContent = '0';
+    }
 }
 
