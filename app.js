@@ -46,6 +46,7 @@ bottomRoll.addEventListener('click', function () {
             }
             doubleSix = true
         }
+        doubleSix = false;
         activeScores += dice;
 
         if (activePlayer == 0) {
