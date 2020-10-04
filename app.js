@@ -29,19 +29,20 @@ let bottomRoll = document.querySelector('.btn-roll');
 console.log(bottomRoll);
 
 
-bottomRoll.addEventListener('click', function () {
+bottomRoll.addEventListener('click', function() {
     var dice = Math.floor(Math.random() * 6 + 1);
     var diceDom = document.querySelector('.dice');
     diceDom.style.display = 'block';
     diceDom.src = "images/dice-" + dice + ".png";
+    diceDom.alt = "You rolled :" + dice;
 
 
     if (dice == 1) {
         console.log("1 rolled");
         nextPlayer();
     } else {
-        if (dice == 6){
-            if (doubleSix){
+        if (dice == 6) {
+            if (doubleSix) {
                 looseScore()
             }
             doubleSix = true
@@ -59,7 +60,7 @@ bottomRoll.addEventListener('click', function () {
 
 });
 let buttonHold = document.querySelector('.btn-hold');
-buttonHold.addEventListener('click', function () {
+buttonHold.addEventListener('click', function() {
     scores[activePlayer] += activeScores;
     checkWinner();
     activeScores = 0;
@@ -72,7 +73,7 @@ buttonHold.addEventListener('click', function () {
     }
     nextPlayer()
 });
-newGame.addEventListener('click', function () {
+newGame.addEventListener('click', function() {
     scores = [0, 0];
     activeScores = 0;
     activePlayer = 0;
@@ -125,6 +126,7 @@ function changeActiveState() {
     document.querySelector('.player-1-panel').classList.toggle('active');
     document.querySelector('.dice').style.display = 'none'
 }
+
 function looseScore() {
     console.log('loosing score');
     activeScores = 0;
@@ -138,4 +140,3 @@ function looseScore() {
         current1.textContent = '0';
     }
 }
-
