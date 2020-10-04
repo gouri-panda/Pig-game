@@ -31,7 +31,14 @@ document.querySelector('.dice').style.display = 'none';
 let bottomRoll = document.querySelector('.btn-roll');
 console.log(bottomRoll);
 
+let theme = localStorage.getItem('theme')
+let toggle = document.getElementById('toggle')
 
+
+if(theme == 'dark-theme'){
+    document.querySelector('body').classList.toggle('dark-theme');
+    toggle.checked = true
+}
 
 bottomRoll.addEventListener('click', function () {
     var dice = Math.floor(Math.random() * 6 + 1);
@@ -149,7 +156,14 @@ function looseScore() {
 
 
 function changeTheme(checked) {
-    document.querySelector('body').classList.toggle('dark-theme');
+    if(checked){
+        localStorage.setItem('theme','dark-theme')
+        document.querySelector('body').classList.toggle('dark-theme');
+
+    }else{
+        localStorage.setItem('theme','light-theme')
+        document.querySelector('body').classList.toggle('dark-theme');
+    }
 }
 function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;
