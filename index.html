@@ -5,11 +5,22 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="style.css">
+        <link type="text/css" rel="stylesheet" href="toggle.css">
         
         <title>Pig Game</title>
     </head>
 
     <body>
+        <div class="params-wrapper">
+            <div class="params-theme">
+                <span>Switch theme !</span>
+                <div>
+                    <input type="checkbox" id="toggle" class="checkbox" onclick="changeTheme(checked);" />  
+                    <label for="toggle" class="switch"></label>
+                </div>
+            </div>
+        </div>
+
         <div class="wrapper clearfix">
             <span class="highest-score"><i class="ion-ios-flag"></i>Highest score : <span>0</span></span>
             <div class="player-0-panel active">
