@@ -139,3 +139,7 @@ function looseScore() {
     }
 }
 
+function changeTheme(checked) {
+    document.querySelector('body').classList.toggle('dark-theme');
+}
+
