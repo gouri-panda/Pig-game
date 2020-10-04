@@ -16,4 +16,4 @@ We are always here to help you out and get started . </br>
 
 Find a issue, then solve the issue and make a pull request to the repo. If you didn't find any helpful issues for you then raise a issue and start solving the issue.
 
-![pig_dice_game_ss](https://user-images.githubusercontent.com/36612418/95020890-d9180800-063b-11eb-9b5e-565979a58c4b.png)
+![pig_dice_game_ss](https://user-images.githubusercontent.com/61481150/95025713-a0c6f880-0640-11eb-8e3a-501144f51fc8.png)
