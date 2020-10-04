@@ -33,7 +33,7 @@ bottomRoll.addEventListener('click', function () {
     var dice = Math.floor(Math.random() * 6 + 1);
     var diceDom = document.querySelector('.dice');
     diceDom.style.display = 'block';
-    diceDom.src = "dice-" + dice + ".png";
+    diceDom.src = "images/dice-" + dice + ".png";
 
 
     if (dice == 1) {
