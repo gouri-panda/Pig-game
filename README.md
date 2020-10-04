@@ -16,4 +16,4 @@ We are always here to help you out and get started . </br>
 
 Find a issue and then solve  the isssue and make a pull request to the repo. If you didn't find any helpful issue for you then raise a issue and start solving the issue.
 
-![Screenshot of pig dice rolling game](pig_dice_game_ss?raw=true "Screenshot of Pig Game")
+![pig_dice_game_ss](https://user-images.githubusercontent.com/36612418/95020890-d9180800-063b-11eb-9b5e-565979a58c4b.png)
