@@ -146,4 +146,3 @@ function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;
     highestScoreEl.textContent = highestScore;
 }
-
