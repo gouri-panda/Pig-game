@@ -13,6 +13,7 @@ let scores = [0, 0];
 let activeScores = 0;
 let activePlayer = 0;
 let doubleSix = false;
+let highestScore = 0;
 
 // console.log(dice)
 // document.querySelector("#current-" + activePlayer).textContent = dice
@@ -22,6 +23,8 @@ let score1 = document.getElementById('score-1');
 let current0 = document.getElementById('current-0');
 let current1 = document.getElementById('current-1');
 let newGame = document.querySelector('.btn-new');
+
+let highestScoreEl = document.querySelector('.highest-score span');
 let x = document.querySelector('#current-' + activePlayer).textContent;
 console.log('x is ' + x);
 document.querySelector('.dice').style.display = 'none';
@@ -29,7 +32,8 @@ let bottomRoll = document.querySelector('.btn-roll');
 console.log(bottomRoll);
 
 
-bottomRoll.addEventListener('click', function() {
+
+bottomRoll.addEventListener('click', function () {
     var dice = Math.floor(Math.random() * 6 + 1);
     var diceDom = document.querySelector('.dice');
     diceDom.style.display = 'block';
@@ -41,8 +45,8 @@ bottomRoll.addEventListener('click', function() {
         console.log("1 rolled");
         nextPlayer();
     } else {
-        if (dice == 6) {
-            if (doubleSix) {
+        if (dice == 6){
+            if (doubleSix){
                 looseScore()
             }
             doubleSix = true
@@ -60,8 +64,9 @@ bottomRoll.addEventListener('click', function() {
 
 });
 let buttonHold = document.querySelector('.btn-hold');
-buttonHold.addEventListener('click', function() {
+buttonHold.addEventListener('click', function () {
     scores[activePlayer] += activeScores;
+    updateHighestScore(scores[activePlayer]);
     checkWinner();
     activeScores = 0;
     if (activePlayer == 0) {
@@ -73,7 +78,8 @@ buttonHold.addEventListener('click', function() {
     }
     nextPlayer()
 });
-newGame.addEventListener('click', function() {
+
+newGame.addEventListener('click', function () {
     scores = [0, 0];
     activeScores = 0;
     activePlayer = 0;
@@ -141,6 +147,11 @@ function looseScore() {
     }
 }
 
+
 function changeTheme(checked) {
     document.querySelector('body').classList.toggle('dark-theme');
+}
+function updateHighestScore(score) {
+    if (score > highestScore) highestScore = score;
+    highestScoreEl.textContent = highestScore;
 }
