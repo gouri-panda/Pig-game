@@ -1,16 +1,14 @@
 # Pig-game
 
-![Alt Text](https://github.com/gouri-panda/Pig-game/blob/master/Pig-Game.gif)
-
 Pig-game(ludo) is a classic board game played between friends and family. Play the dice game of kings! Recall your childhood!
 
 
 ## GAME RULES:
 
 - The game has 2 players, playing in rounds
-- In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
+- In each turn, a player rolls a dice as many times as he wishes. Each result get added to his ROUND score
 - BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
-- The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
+- The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game.
 
 
@@ -19,7 +17,7 @@ The player with the greater value on the side of the dice wins.
 
 ## Set Up:
 This project can be tested and implemented using Microsoft VSCode and we can run using Open with live server. 
-Working with xml can be done in Eclipse or Netbeans 
+Working with XML can be done in Eclipse or Netbeans 
 
 
 
@@ -28,13 +26,13 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Developed with
-This game was developed using javascript math.random that draws numbers randomly and using Document query Selector 
+This game was developed using javascript math.random that draws numbers randomly and using Document Query Selector 
 
 ## Copyright(c) 2020
 
 Pig-game(ludo) is a classic board game played between friends and family. Play the dice game of kings! Recall your childhood!
 
- To remain unbiased we chose not to include ourselves in the list below, but we think you’ll love us anyway.
+To remain unbiased we chose not to include ourselves in the list below, but we think you’ll love us anyway.
 Checkout our [website](https://gouri-panda.github.io/Pig-game/)
 
 # Setting up the project
@@ -45,9 +43,13 @@ Now you are ready to get started 🎉
 
 
 # Contributing
-Get started with this simple and easy to follow project , it doesn't matter whether you are a beginner or a pro in web-development and open source !
-We are always here to help you out and get started . </br>
+Get started with this simple and easy to follow project, it doesn't matter whether you are a beginner or a professional in web-development and open source!
+We are always here to help you out and get started. </br>
 
-Find a issue, then solve the issue and make a pull request to the repo. If you didn't find any helpful issues for you then raise a issue and start solving the issue.
+Find an issue, then solve the issue and make a pull request to the repo. If you didn't find any helpful issues for you then raise an issue and start solving the issue.
 
-![pig_dice_game_ss](https://user-images.githubusercontent.com/61481150/95025713-a0c6f880-0640-11eb-8e3a-501144f51fc8.png)
+![pig_dice_game_ss](https://user-images.githubusercontent.com/43576162/95025880-d6a0c700-06aa-11eb-863b-695c089cb0fe.png)
+
+![Alt Text](https://i.imgur.com/hQR9STC.gif)
+
+![REsponsive_site](https://github.com/aritrochakraborty29/www.predulive.org/blob/master/img/Pig-Game.gif)
