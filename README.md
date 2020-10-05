@@ -50,6 +50,8 @@ Find an issue, then solve the issue and make a pull request to the repo. If you 
 
 ![pig_dice_game_ss](https://user-images.githubusercontent.com/43576162/95025880-d6a0c700-06aa-11eb-863b-695c089cb0fe.png)
 
+
 ![Alt Text](https://i.imgur.com/hQR9STC.gif)
+
 
 ![REsponsive_site](https://github.com/aritrochakraborty29/www.predulive.org/blob/master/img/Pig-Game.gif)
