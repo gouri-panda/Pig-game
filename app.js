@@ -53,7 +53,7 @@ document.querySelector('.dice').style.display = 'none';
 let bottomRoll = document.querySelector('.btn-roll');
 console.log(bottomRoll);
 
-
+checkTheme();
 
 bottomRoll.addEventListener('click', function () {
     var dice = Math.floor(Math.random() * 6 + 1);
@@ -168,10 +168,33 @@ function looseScore() {
         current1.textContent = '0';
     }
 }
+function checkTheme() {
+    if (window.localStorage) {
+        let body = document.querySelector('body');
+        let toogle = document.querySelector('#toggle');
+        let darkTheme = localStorage.getItem('dark-theme');
 
+        if (darkTheme) {
+            if (darkTheme === "on") {
+                body.classList.add("dark-theme");
+                toogle.checked = true;
+            } else {
+                body.classList.remove("dark-theme");
+                toogle.checked = false;
+            }
+        }
+    }
+}
 
-function changeTheme(checked) {
-    document.querySelector('body').classList.toggle('dark-theme');
+function changeTheme() {
+    let body = document.querySelector('body');
+    body.classList.toggle('dark-theme');
+    
+    if (body.classList.contains("dark-theme")) {
+        localStorage.setItem("dark-theme", "on");
+    } else {
+        localStorage.setItem("dark-theme", "off");
+    }
 }
 function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;
