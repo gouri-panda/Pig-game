@@ -71,11 +71,6 @@ document.querySelector('body').addEventListener('keydown', function (e) {
     }
 });
 
-/**
- * *****************************
- * * FUNCTIONS
- * ***************************** 
- **/
 
 function newGame() {
     scores = [0, 0];
@@ -95,7 +90,7 @@ function hold() {
     updateHighestScore(scores[activePlayer]);
     checkWinner();
     activeScores = 0;
-    if (activePlayer == 0) {
+    if (activePlayer === 0) {
         score0.textContent = scores[0].toString();
         current0.textContent = '0'
     } else {
@@ -119,11 +114,11 @@ function roll() {
     diceDom.alt = "You rolled :" + dice;
 
 
-    if (dice == 1) {
+    if (dice === 1) {
         console.log("1 rolled");
         nextPlayer();
     } else {
-        if (dice == 6){
+        if (dice === 6){
             if (doubleSix){
                 looseScore()
             }
@@ -132,7 +127,7 @@ function roll() {
         doubleSix = false;
         activeScores += dice;
 
-        if (activePlayer == 0) {
+        if (activePlayer === 0) {
             current0.textContent = activeScores;
         } else {
             current1.textContent = activeScores;
@@ -140,7 +135,7 @@ function roll() {
 
     }
 
-});
+}
 
 let buttonHold = document.querySelector('.btn-hold');
 buttonHold.addEventListener('click', function () {
@@ -172,13 +167,9 @@ newGame.addEventListener('click', function () {
     document.getElementById('score-goal-box').readOnly = false;
 });
 
-=======
-}
-
 
 function nextPlayer() {
-    if (activePlayer == 0) {
-
+    if (activePlayer === 0) {
         score0.textContent = scores[0].toString();
         activeScores = 0;
         current0.textContent = '0';
@@ -187,7 +178,6 @@ function nextPlayer() {
         //switch active state
         changeActiveState();
     } else {
-
         score1.textContent = scores[1].toString();
         activeScores = 0;
         current1.textContent = '0';
@@ -218,7 +208,7 @@ function changeActiveState() {
 function looseScore() {
     console.log('loosing score');
     activeScores = 0;
-    if (activePlayer == 0) {
+    if (activePlayer === 0) {
         scores[0] = 0;
         score0.textContent = scores[0].toString();
         current0.textContent = '0';
@@ -231,16 +221,16 @@ function looseScore() {
 function checkTheme() {
     if (window.localStorage) {
         let body = document.querySelector('body');
-        let toogle = document.querySelector('#toggle');
+        let toggle = document.querySelector('#toggle');
         let darkTheme = localStorage.getItem('dark-theme');
 
         if (darkTheme) {
             if (darkTheme === "on") {
                 body.classList.add("dark-theme");
-                toogle.checked = true;
+                toggle.checked = true;
             } else {
                 body.classList.remove("dark-theme");
-                toogle.checked = false;
+                toggle.checked = false;
             }
         }
     }
