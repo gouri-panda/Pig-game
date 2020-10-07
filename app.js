@@ -137,21 +137,6 @@ function roll() {
 
 }
 
-let buttonHold = document.querySelector('.btn-hold');
-buttonHold.addEventListener('click', function () {
-    scores[activePlayer] += activeScores;
-    updateHighestScore(scores[activePlayer]);
-    checkWinner();
-    activeScores = 0;
-    if (activePlayer == 0) {
-        score0.textContent = scores[0].toString();
-        current0.textContent = '0'
-    } else {
-        score1.textContent = scores[1].toString();
-        current1.textContent = '0'
-    }
-    nextPlayer()
-});
 
 newGame.addEventListener('click', function () {
     scores = [0, 0];
@@ -191,11 +176,12 @@ function nextPlayer() {
 function checkWinner() {
     if (scores[0] >= goal) {
         document.querySelector('.player-0-panel').classList.add('winner');
-        document.querySelector('.player-0-panel').classList.add('active')
+        document.querySelector('.player-0-panel').classList.add('active');
+        alert("Player 1 is winner")
     } else if (scores[1] >= goal) {
-
         document.querySelector('.player-1-panel').classList.add('winner');
-        document.querySelector('.player-1-panel').classList.add('active')
+        document.querySelector('.player-1-panel').classList.add('active');
+        alert('Player 2 is winner')
     }
 }
 
