@@ -217,4 +217,8 @@ class Player {
     setScore(score) {
         this.score = score;
     }
+
+    toString() {
+        return "Player (score: " + this.score + ")";
+    }
 }
