@@ -37,25 +37,74 @@ let activePlayer = 0;
 let doubleSix = false;
 let highestScore = 0;
 
-// console.log(dice)
-// document.querySelector("#current-" + activePlayer).textContent = dice
-// document.querySelector('#current-'+ activePlayer).innerHTML = '<em>' + dice + '</em>';
 let score0 = document.getElementById('score-0');
 let score1 = document.getElementById('score-1');
 let current0 = document.getElementById('current-0');
 let current1 = document.getElementById('current-1');
-let newGame = document.querySelector('.btn-new');
 
 let highestScoreEl = document.querySelector('.highest-score span');
 let x = document.querySelector('#current-' + activePlayer).textContent;
 console.log('x is ' + x);
 document.querySelector('.dice').style.display = 'none';
-let bottomRoll = document.querySelector('.btn-roll');
-console.log(bottomRoll);
 
 checkTheme();
 
-bottomRoll.addEventListener('click', function () {
+document.querySelector('.btn-roll').addEventListener('click', roll);
+
+document.querySelector('.btn-hold').addEventListener('click', hold);
+
+document.querySelector('.btn-new').addEventListener('click', newGame);
+
+// Key pressing handler
+document.querySelector('body').addEventListener('keydown', function (e) {
+    switch(e.code) {
+        case "Space":
+            roll();
+            break;
+        case "Enter":
+            hold();
+            break;
+        case "KeyN":
+            newGame();
+            break;
+    }
+});
+
+/**
+ * *****************************
+ * * FUNCTIONS
+ * ***************************** 
+ **/
+
+function newGame() {
+    scores = [0, 0];
+    activeScores = 0;
+    activePlayer = 0;
+    score0.textContent = '0';
+    score1.textContent = '0';
+    current0.textContent = '0';
+    current1.textContent = '0';
+    document.querySelector('.player-0-panel').classList.add('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    document.querySelector('.dice').style.display = 'none'
+}
+
+function hold() {
+    scores[activePlayer] += activeScores;
+    updateHighestScore(scores[activePlayer]);
+    checkWinner();
+    activeScores = 0;
+    if (activePlayer == 0) {
+        score0.textContent = scores[0].toString();
+        current0.textContent = '0'
+    } else {
+        score1.textContent = scores[1].toString();
+        current1.textContent = '0'
+    }
+    nextPlayer()
+}
+
+function roll() {
     var dice = Math.floor(Math.random() * 6 + 1);
     var diceDom = document.querySelector('.dice');
     diceDom.style.display = 'block';
@@ -83,37 +132,7 @@ bottomRoll.addEventListener('click', function () {
         }
 
     }
-
-});
-let buttonHold = document.querySelector('.btn-hold');
-buttonHold.addEventListener('click', function () {
-    scores[activePlayer] += activeScores;
-    updateHighestScore(scores[activePlayer]);
-    checkWinner();
-    activeScores = 0;
-    if (activePlayer == 0) {
-        score0.textContent = scores[0].toString();
-        current0.textContent = '0'
-    } else {
-        score1.textContent = scores[1].toString();
-        current1.textContent = '0'
-    }
-    nextPlayer()
-});
-
-newGame.addEventListener('click', function () {
-    scores = [0, 0];
-    activeScores = 0;
-    activePlayer = 0;
-    score0.textContent = '0';
-    score1.textContent = '0';
-    current0.textContent = '0';
-    current1.textContent = '0';
-    document.querySelector('.player-0-panel').classList.add('active');
-    document.querySelector('.player-1-panel').classList.remove('active');
-    document.querySelector('.dice').style.display = 'none'
-});
-
+}
 
 function nextPlayer() {
     if (activePlayer == 0) {
