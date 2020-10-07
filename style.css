@@ -27,7 +27,7 @@ SOFTWARE. */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 }
 
 .clearfix::after {
@@ -110,7 +110,7 @@ body.dark-theme .active { background-color: #333; }
     color: #EB4D4D;
     top: -7px;
     right: 10px;
-    
+
 }
 
 .player-current-box {
@@ -170,7 +170,7 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new { top: 75px;}
+.btn-new { top: 100px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
 
@@ -222,10 +222,35 @@ body.dark-theme .winner { background-color: #333; }
     text-transform: uppercase;
     font-weight: 300;
 }
-.highest-score span { 
+.highest-score span {
     font-weight: bold;
     color: #EB4D4D;
 }
 .btn-high-score span {
     display: inline;
+}
+
+/************************************************
+*** SCORE GOAL
+*************************************************/
+.score-goal {
+    width: auto;
+    top: 55px;
+    position: absolute;
+    left: 60%;
+    transform: translateX(-50%);
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+input {
+  width: 15%;
+  border: 2px solid red;
+  border-radius: 4px;
+  font-family: Lato;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 300;
 }
