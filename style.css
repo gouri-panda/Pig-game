@@ -41,7 +41,7 @@ body {
     background-size: cover;
     background-position: center;
     font-family: Lato;
-    font-weight: 300;
+    font-weight: 290;
     position: relative;
     height: 100vh;
     color: #555;
@@ -54,7 +54,7 @@ body.dark-theme {
 .wrapper {
     width: 1000px;
     position: absolute;
-    top: 50%;
+    top: 51%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -69,7 +69,7 @@ body.dark-theme .wrapper {
 .player-1-panel {
     width: 50%;
     float: left;
-    height: 600px;
+    height: 601px;
     padding: 100px;
 }
 
