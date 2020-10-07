@@ -200,3 +200,21 @@ function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;
     highestScoreEl.textContent = highestScore;
 }
+
+class Player {
+    Player() {
+        this.init();
+    }
+
+    init() {
+        this.score = 0;
+    }
+
+    getScore() {
+        return this.score;
+    }
+
+    setScore(score) {
+        this.score = score;
+    }
+}
