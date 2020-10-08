@@ -101,7 +101,7 @@ function hold() {
     updateHighestScore(scores[activePlayer]);
     checkWinner();
     activeScores = 0;
-    if (activePlayer == 0) {
+    if (activePlayer === 0) {
         score0.textContent = scores[0].toString();
         current0.textContent = '0'
     } else {
@@ -159,22 +159,6 @@ function roll() {
     }
 };
 
-let buttonHold = document.querySelector('.btn-hold');
-buttonHold.addEventListener('click', function () {
-    scores[activePlayer] += activeScores;
-    updateHighestScore(scores[activePlayer]);
-    checkWinner();
-    activeScores = 0;
-    if (activePlayer == 0) {
-        score0.textContent = scores[0].toString();
-        current0.textContent = '0'
-    } else {
-        score1.textContent = scores[1].toString();
-        current1.textContent = '0'
-    }
-    nextPlayer()
-});
-
 newGame.addEventListener('click', function () {
     scores = [0, 0];
     activeScores = 0;
@@ -190,8 +174,7 @@ newGame.addEventListener('click', function () {
 });
 
 function nextPlayer() {
-    if (activePlayer == 0) {
-
+    if (activePlayer === 0) {
         score0.textContent = scores[0].toString();
         activeScores = 0;
         current0.textContent = '0';
@@ -200,7 +183,6 @@ function nextPlayer() {
         //switch active state
         changeActiveState();
     } else {
-
         score1.textContent = scores[1].toString();
         activeScores = 0;
         current1.textContent = '0';
@@ -214,11 +196,12 @@ function nextPlayer() {
 function checkWinner() {
     if (scores[0] >= goal) {
         document.querySelector('.player-0-panel').classList.add('winner');
-        document.querySelector('.player-0-panel').classList.add('active')
+        document.querySelector('.player-0-panel').classList.add('active');
+        alert("Player 1 is winner")
     } else if (scores[1] >= goal) {
-
         document.querySelector('.player-1-panel').classList.add('winner');
-        document.querySelector('.player-1-panel').classList.add('active')
+        document.querySelector('.player-1-panel').classList.add('active');
+        alert('Player 2 is winner')
     }
 }
 
@@ -231,7 +214,7 @@ function changeActiveState() {
 function looseScore() {
     console.log('loosing score');
     activeScores = 0;
-    if (activePlayer == 0) {
+    if (activePlayer === 0) {
         scores[0] = 0;
         score0.textContent = scores[0].toString();
         current0.textContent = '0';
@@ -244,16 +227,16 @@ function looseScore() {
 function checkTheme() {
     if (window.localStorage) {
         let body = document.querySelector('body');
-        let toogle = document.querySelector('#toggle');
+        let toggle = document.querySelector('#toggle');
         let darkTheme = localStorage.getItem('dark-theme');
 
         if (darkTheme) {
             if (darkTheme === "on") {
                 body.classList.add("dark-theme");
-                toogle.checked = true;
+                toggle.checked = true;
             } else {
                 body.classList.remove("dark-theme");
-                toogle.checked = false;
+                toggle.checked = false;
             }
         }
     }
