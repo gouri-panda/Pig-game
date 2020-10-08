@@ -126,25 +126,76 @@ let activeScores = 0;
 let activePlayer = 0;
 let doubleSix = false;
 let highestScore = 0;
-
-let newGame = document.querySelector('.btn-new');
+let goal = 100;
 
 let highestScoreEl = document.querySelector('.highest-score span');
 document.querySelector('.dice').style.display = 'none';
-let bottomRoll = document.querySelector('.btn-roll');
-console.log(bottomRoll);
 
 checkTheme();
 
-bottomRoll.addEventListener('click', function () {
-    var dice = Math.floor(Math.random() * 6 + 1);
-    var diceDom = document.querySelector('.dice');
+document.querySelector('.btn-roll').addEventListener('click', roll);
+
+document.querySelector('.btn-hold').addEventListener('click', hold);
+
+document.querySelector('.btn-new').addEventListener('click', newGame);
+
+// Key pressing handler
+document.querySelector('body').addEventListener('keydown', function (e) {
+    switch (e.code) {
+        case "Space":
+            roll();
+            break;
+        case "Enter":
+            hold();
+            break;
+        case "KeyN":
+            newGame();
+            break;
+    }
+});
+
+
+function newGame() {
+    activeScores = 0;
+    activePlayer = 0;
+    uiElements.forEach((playerUIElements, index) => {
+        playerUIElements.current.textContent = '0';
+        playerUIElements.total.textContent = '0';
+    })
+
+    document.querySelectorAll('.player-panel').forEach(e => e.classList.remove('active'));
+    document.querySelector('.player-0-panel').classList.add('active');
+    document.querySelector('.dice').style.display = 'none'
+    document.getElementById('score-goal-box').readOnly = false;
+}
+
+function hold() {
+    let newScore = players[activePlayer].addScore(activeScores);
+    updateHighestScore(newScore);
+    checkWinner();
+    activeScores = 0;
+
+    uiElements[activePlayer].total.textContent = newScore.toString();
+    uiElements[activePlayer].current.textContent = '0';
+
+    nextPlayer()
+}
+
+function roll() {
+    if (!document.getElementById('score-goal-box').readOnly) {
+        document.getElementById('score-goal-box').readOnly = true;
+        goal = parseInt(document.getElementById('score-goal-box').value);
+    }
+
+    let dice = Math.floor(Math.random() * 6 + 1);
+    let diceDom = document.querySelector('.dice');
+
     diceDom.style.display = 'block';
     diceDom.src = "images/dice-" + dice + ".png";
     diceDom.alt = "You rolled :" + dice;
 
 
-    if (dice == 1) {
+    if (dice === 1) {
         console.log("1 rolled");
         nextPlayer();
     } else {
@@ -161,33 +212,7 @@ bottomRoll.addEventListener('click', function () {
 
     }
 
-});
-let buttonHold = document.querySelector('.btn-hold');
-buttonHold.addEventListener('click', function () {
-    let newScore = players[activePlayer].addScore(activeScores);
-    updateHighestScore(newScore);
-    checkWinner();
-    activeScores = 0;
-
-    uiElements[activePlayer].total.textContent = newScore.toString();
-    uiElements[activePlayer].current.textContent = '0';
-
-    nextPlayer()
-});
-
-newGame.addEventListener('click', function () {
-    activeScores = 0;
-    activePlayer = 0;
-    uiElements.forEach((playerUIElements, index) => {
-        playerUIElements.current.textContent = '0';
-        playerUIElements.total.textContent = '0';
-    })
-
-    document.querySelectorAll('.player-panel').forEach(e => e.classList.remove('active'));
-    document.querySelector('.player-0-panel').classList.add('active');
-    document.querySelector('.dice').style.display = 'none'
-});
-
+}
 
 function nextPlayer() {
 
@@ -206,7 +231,7 @@ function checkWinner() {
     for (let i = 0; i < numPlayers; i++) {
         let player = players[i];
         let score = player.getScore();
-        if (score >= 100) {
+        if (score >= goal) {
             console.log("we have a winner: " + player.getName())
             uiElements[i].winnerPanel.classList.add('winner');
             uiElements[i].winnerPanel.classList.add('active');
@@ -217,7 +242,7 @@ function checkWinner() {
 function changeActiveState() {
     document.querySelectorAll('.player-panel').forEach(e => e.classList.remove('active'));
     document.querySelector(`.player-${activePlayer}-panel`).classList.add('active');
-    document.querySelector('.dice').style.display = 'none'
+    // document.querySelector('.dice').style.display = 'none'
 }
 
 function looseScore() {
@@ -231,16 +256,16 @@ function looseScore() {
 function checkTheme() {
     if (window.localStorage) {
         let body = document.querySelector('body');
-        let toogle = document.querySelector('#toggle');
+        let toggle = document.querySelector('#toggle');
         let darkTheme = localStorage.getItem('dark-theme');
 
         if (darkTheme) {
             if (darkTheme === "on") {
                 body.classList.add("dark-theme");
-                toogle.checked = true;
+                toggle.checked = true;
             } else {
                 body.classList.remove("dark-theme");
-                toogle.checked = false;
+                toggle.checked = false;
             }
         }
     }
@@ -262,4 +287,4 @@ function updateHighestScore(score) {
     highestScoreEl.textContent = highestScore;
 }
 
-
+newGame();
