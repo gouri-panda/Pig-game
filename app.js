@@ -157,7 +157,7 @@ function roll() {
           }
       }
     }
-});
+};
 
 let buttonHold = document.querySelector('.btn-hold');
 buttonHold.addEventListener('click', function () {
@@ -188,10 +188,6 @@ newGame.addEventListener('click', function () {
     document.querySelector('.dice').style.display = 'none'
     document.getElementById('score-goal-box').readOnly = false;
 });
-
-=======
-}
-
 
 function nextPlayer() {
     if (activePlayer == 0) {
