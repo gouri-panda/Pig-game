@@ -56,4 +56,4 @@ Find an issue, then solve the issue and make a pull request to the repo. If you 
 
 If you wanna get in touch with us please join our slack channel:  
 
-[Slack Channel](https://join.slack.com/t/newworkspace-uco4265/shared_invite/zt-huokfrna-unLOpo_bo7fKACHZ2rH7jA)
+:tv: [Slack Channel](https://join.slack.com/t/newworkspace-uco4265/shared_invite/zt-huokfrna-unLOpo_bo7fKACHZ2rH7jA)
