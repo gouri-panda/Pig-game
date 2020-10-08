@@ -46,6 +46,7 @@ body {
     height: 100vh;
     color: #555;
 }
+
 body.dark-theme {
     background-image: linear-gradient(rgba(62, 20, 20, 0.7), rgba(62, 20, 20, 0.7)), url(images/back.jpg);
     color: #fff;
@@ -61,6 +62,7 @@ body.dark-theme {
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
+
 body.dark-theme .wrapper {
     background-color: #222;
 }
@@ -88,7 +90,7 @@ body.dark-theme .wrapper {
     margin-top: 20px;
     margin-bottom: 10px;
     position: relative;
-    font-family:sansa-sarif;
+    font-family: sansa-sarif;
 }
 
 .player-score {
@@ -99,9 +101,17 @@ body.dark-theme .wrapper {
     margin-bottom: 130px;
 }
 
-.active { background-color: #f7f7f7; }
-body.dark-theme .active { background-color: #333; }
-.active .player-name { font-weight: 300; }
+.active {
+    background-color: #f7f7f7;
+}
+
+body.dark-theme .active {
+    background-color: #333;
+}
+
+.active .player-name {
+    font-weight: 300;
+}
 
 .active .player-name::after {
     content: "\2022";
@@ -148,12 +158,18 @@ button {
     font-weight: 300;
     transition: background-color 0.3s, color 0.3s;
 }
+
 body.dark-theme button {
     color: #fff;
 }
 
-button:hover { font-weight: 600; }
-button:hover i { margin-right: 20px; }
+button:hover {
+    font-weight: 600;
+}
+
+button:hover i {
+    margin-right: 20px;
+}
 
 button:focus {
     outline: none;
@@ -170,9 +186,17 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new { top: 100px;}
-.btn-roll { top: 403px;}
-.btn-hold { top: 467px;}
+.btn-new {
+    top: 100px;
+}
+
+.btn-roll {
+    top: 403px;
+}
+
+.btn-hold {
+    top: 467px;
+}
 
 .dice {
     position: absolute;
@@ -183,9 +207,18 @@ i {
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
 
-.winner { background-color: #f7f7f7; }
-body.dark-theme .winner { background-color: #333; }
-.winner .player-name { font-weight: 300; color: #EB4D4D; }
+.winner {
+    background-color: #f7f7f7;
+}
+
+body.dark-theme .winner {
+    background-color: #333;
+}
+
+.winner .player-name {
+    font-weight: 300;
+    color: #EB4D4D;
+}
 
 
 .params-wrapper {
@@ -202,10 +235,14 @@ body.dark-theme .winner { background-color: #333; }
     align-items: center;
 }
 
-.params-theme > span {
+.params-theme>span {
     margin-bottom: 5px;
 }
-.winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+.winner .player-name {
+    font-weight: 300;
+    color: #EB4D4D;
+}
 
 
 /**********************************************
@@ -222,10 +259,12 @@ body.dark-theme .winner { background-color: #333; }
     text-transform: uppercase;
     font-weight: 300;
 }
+
 .highest-score span {
     font-weight: bold;
     color: #EB4D4D;
 }
+
 .btn-high-score span {
     display: inline;
 }
@@ -234,10 +273,11 @@ body.dark-theme .winner { background-color: #333; }
 *** SCORE GOAL
 *************************************************/
 .score-goal {
-    width: auto;
-    top: 55px;
-    position: absolute;
-    left: 60%;
+    width: 180px;
+    margin-left: 20px;
+    top: 60px;
+    position: absolute; 
+    left: 50%; 
     transform: translateX(-50%);
     font-family: Lato;
     font-size: 20px;
@@ -246,11 +286,12 @@ body.dark-theme .winner { background-color: #333; }
 }
 
 input {
-  width: 15%;
-  border: 2px solid red;
-  border-radius: 4px;
-  font-family: Lato;
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 300;
+    width: 45%;
+    margin-left: 0px;
+    border: 2px solid red;
+    border-radius: 4px;
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
 }
