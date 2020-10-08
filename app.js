@@ -200,12 +200,17 @@ function checkWinner() {
 }
 
 function changeActiveState() {
+
   /**
    * Set the active state to the current player
    */
   document.querySelector(".player-0-panel").classList.toggle("active");
   document.querySelector(".player-1-panel").classList.toggle("active");
   document.querySelector(".dice").style.display = "none";
+
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
 }
 
 function looseScore() {
