@@ -30,6 +30,7 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
+
 console.log("start");
 let scores = [0, 0];
 let activeScores = 0;
@@ -37,202 +38,233 @@ let activePlayer = 0;
 let doubleSix = false;
 let highestScore = 0;
 let goal = 100;
+let player1 = "";
+let player2 = "";
 
-let score0 = document.getElementById('score-0');
-let score1 = document.getElementById('score-1');
-let current0 = document.getElementById('current-0');
-let current1 = document.getElementById('current-1');
+let score0 = document.getElementById("score-0");
+let score1 = document.getElementById("score-1");
+let current0 = document.getElementById("current-0");
+let current1 = document.getElementById("current-1");
 
-let highestScoreEl = document.querySelector('.highest-score span');
-let x = document.querySelector('#current-' + activePlayer).textContent;
-console.log('x is ' + x);
-document.querySelector('.dice').style.display = 'none';
+let highestScoreEl = document.querySelector(".highest-score span");
+let x = document.querySelector("#current-" + activePlayer).textContent;
+console.log("x is " + x);
+
+document.querySelector(".dice").style.display = "none";
 
 checkTheme();
 
-document.querySelector('.btn-roll').addEventListener('click', roll);
+document.querySelector(".btn-roll").addEventListener("click", roll);
 
-document.querySelector('.btn-hold').addEventListener('click', hold);
+document.querySelector(".btn-hold").addEventListener("click", hold);
 
-document.querySelector('.btn-new').addEventListener('click', newGame);
+document.querySelector(".btn-new").addEventListener("click", newGame);
 
 // Key pressing handler
-document.querySelector('body').addEventListener('keydown', function (e) {
-    switch(e.code) {
-        case "Space":
-            roll();
-            break;
-        case "Enter":
-            hold();
-            break;
-        case "KeyN":
-            newGame();
-            break;
-    }
+document.querySelector("body").addEventListener("keydown", function (e) {
+  switch (e.code) {
+    case "Space":
+      roll();
+      break;
+    case "Enter":
+      hold();
+      break;
+    case "KeyN":
+      newGame();
+      break;
+  }
 });
 
+function setPlayers() {
+  /**
+   * This function will set the player names
+   * By default it will take PLAYER 1 & PLAYER 2
+   * if no name specified
+   */
+  player1 = prompt("Name of Player1: ") || "PLAYER 1";
+  player2 = prompt("Name of Player2: ") || "PLAYER 2";
+  document.getElementById("name-0").innerText = player1;
+  document.getElementById("name-1").innerText = player2;
+}
+
+setPlayers();
 
 function newGame() {
-    scores = [0, 0];
-    activeScores = 0;
-    activePlayer = 0;
-    score0.textContent = '0';
-    score1.textContent = '0';
-    current0.textContent = '0';
-    current1.textContent = '0';
-    document.querySelector('.player-0-panel').classList.add('active');
-    document.querySelector('.player-1-panel').classList.remove('active');
-    document.querySelector('.dice').style.display = 'none'
+  /**
+   * Create A New Game Scene
+   * Sets initial scores for user
+   */
+  scores = [0, 0];
+  activeScores = 0;
+  activePlayer = 0;
+  score0.textContent = "0";
+  score1.textContent = "0";
+  current0.textContent = "0";
+  current1.textContent = "0";
+  document.querySelector(".player-0-panel").classList.add("active");
+  document.querySelector(".player-1-panel").classList.remove("active");
+  document.querySelector(".dice").style.display = "none";
 }
 
 function hold() {
-    scores[activePlayer] += activeScores;
-    updateHighestScore(scores[activePlayer]);
-    checkWinner();
-    activeScores = 0;
-    if (activePlayer === 0) {
-        score0.textContent = scores[0].toString();
-        current0.textContent = '0'
-    } else {
-        score1.textContent = scores[1].toString();
-        current1.textContent = '0'
-    }
-    nextPlayer()
+  /**
+   * Holds the score for the respective player in each dice roll
+   */
+  scores[activePlayer] += activeScores;
+  updateHighestScore(scores[activePlayer]);
+  checkWinner();
+  activeScores = 0;
+  if (activePlayer === 0) {
+    score0.textContent = scores[0].toString();
+    current0.textContent = "0";
+  } else {
+    score1.textContent = scores[1].toString();
+    current1.textContent = "0";
+  }
+  nextPlayer();
 }
 
 function roll() {
-    if (!document.getElementById('score-goal-box').readOnly) {
-      document.getElementById('score-goal-box').readOnly = true;
-      goal = parseInt(document.getElementById('score-goal-box').value);
+  /**
+   * Randomly roll the dice and gets the output
+   */
+  if (!document.getElementById("score-goal-box").readOnly) {
+    document.getElementById("score-goal-box").readOnly = true;
+    goal = parseInt(document.getElementById("score-goal-box").value);
+  }
+
+  let dice = Math.floor(Math.random() * 6 + 1);
+  let diceDom = document.querySelector(".dice");
+
+  diceDom.style.display = "block";
+  diceDom.src = "images/dice-" + dice + ".png";
+  diceDom.alt = "You rolled :" + dice;
+
+  if (dice === 1) {
+    console.log("1 rolled");
+    nextPlayer();
+  } else {
+    if (dice === 6) {
+      if (doubleSix) {
+        looseScore();
+      }
+      doubleSix = true;
     }
+    doubleSix = false;
+    activeScores += dice;
 
-    let dice = Math.floor(Math.random() * 6 + 1);
-    let diceDom = document.querySelector('.dice');
-
-    diceDom.style.display = 'block';
-    diceDom.src = "images/dice-" + dice + ".png";
-    diceDom.alt = "You rolled :" + dice;
-
-
-    if (dice === 1) {
-        console.log("1 rolled");
-        nextPlayer();
+    if (activePlayer === 0) {
+      current0.textContent = activeScores;
     } else {
-        if (dice === 6){
-            if (doubleSix){
-                looseScore()
-            }
-            doubleSix = true
-        }
-        doubleSix = false;
-        activeScores += dice;
-
-        if (activePlayer === 0) {
-            current0.textContent = activeScores;
-        } else {
-            current1.textContent = activeScores;
-        }
-
+      current1.textContent = activeScores;
     }
-
+  }
 }
 
-
-newGame.addEventListener('click', function () {
-    scores = [0, 0];
-    activeScores = 0;
-    activePlayer = 0;
-    score0.textContent = '0';
-    score1.textContent = '0';
-    current0.textContent = '0';
-    current1.textContent = '0';
-    document.querySelector('.player-0-panel').classList.add('active');
-    document.querySelector('.player-1-panel').classList.remove('active');
-    document.querySelector('.dice').style.display = 'none'
-    document.getElementById('score-goal-box').readOnly = false;
-});
-
-
 function nextPlayer() {
-    if (activePlayer === 0) {
-        score0.textContent = scores[0].toString();
-        activeScores = 0;
-        current0.textContent = '0';
-        //switch player
-        activePlayer = 1;
-        //switch active state
-        changeActiveState();
-    } else {
-        score1.textContent = scores[1].toString();
-        activeScores = 0;
-        current1.textContent = '0';
-        //switch player
-        activePlayer = 0;
-        //switch active state
-        changeActiveState()
-    }
+  /**
+   * Pass the gameplay once a player finish its roll and holding the score
+   */
+  if (activePlayer === 0) {
+    score0.textContent = scores[0].toString();
+    activeScores = 0;
+    current0.textContent = "0";
+    //switch player
+    activePlayer = 1;
+    //switch active state
+    changeActiveState();
+  } else {
+    score1.textContent = scores[1].toString();
+    activeScores = 0;
+    current1.textContent = "0";
+    //switch player
+    activePlayer = 0;
+    //switch active state
+    changeActiveState();
+  }
 }
 
 function checkWinner() {
-    if (scores[0] >= goal) {
-        document.querySelector('.player-0-panel').classList.add('winner');
-        document.querySelector('.player-0-panel').classList.add('active');
-        alert("Player 1 is winner")
-    } else if (scores[1] >= goal) {
-        document.querySelector('.player-1-panel').classList.add('winner');
-        document.querySelector('.player-1-panel').classList.add('active');
-        alert('Player 2 is winner')
-    }
+  /**
+   * Checks the Winner and view the winner
+   */
+  if (scores[0] >= goal) {
+    document.querySelector(".player-0-panel").classList.add("winner");
+    document.querySelector(".player-0-panel").classList.add("active");
+    alert(`${player1} is winner`);
+  } else if (scores[1] >= goal) {
+    document.querySelector(".player-1-panel").classList.add("winner");
+    document.querySelector(".player-1-panel").classList.add("active");
+    alert(`${player2} is winner`);
+  }
 }
 
 function changeActiveState() {
-    document.querySelector('.player-0-panel').classList.toggle('active');
-    document.querySelector('.player-1-panel').classList.toggle('active');
-    document.querySelector('.dice').style.display = 'none'
+  /**
+   * Set the active state to the current player
+   */
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+  document.querySelector(".dice").style.display = "none";
 }
 
 function looseScore() {
-    console.log('loosing score');
-    activeScores = 0;
-    if (activePlayer === 0) {
-        scores[0] = 0;
-        score0.textContent = scores[0].toString();
-        current0.textContent = '0';
-    } else {
-        scores[1] = 0;
-        score1.textContent = scores[1].toString();
-        current1.textContent = '0';
-    }
+  /**
+   * Loose the score of the user
+   */
+  console.log("loosing score");
+  activeScores = 0;
+  if (activePlayer === 0) {
+    scores[0] = 0;
+    score0.textContent = scores[0].toString();
+    current0.textContent = "0";
+  } else {
+    scores[1] = 0;
+    score1.textContent = scores[1].toString();
+    current1.textContent = "0";
+  }
 }
 function checkTheme() {
-    if (window.localStorage) {
-        let body = document.querySelector('body');
-        let toggle = document.querySelector('#toggle');
-        let darkTheme = localStorage.getItem('dark-theme');
+  /**
+   * Check the current theme's status
+   */
+  if (window.localStorage) {
+    let body = document.querySelector("body");
+    let toggle = document.querySelector("#toggle");
+    let darkTheme = localStorage.getItem("dark-theme");
 
-        if (darkTheme) {
-            if (darkTheme === "on") {
-                body.classList.add("dark-theme");
-                toggle.checked = true;
-            } else {
-                body.classList.remove("dark-theme");
-                toggle.checked = false;
-            }
-        }
+    if (darkTheme) {
+      if (darkTheme === "on") {
+        body.classList.add("dark-theme");
+        toggle.checked = true;
+      } else {
+        body.classList.remove("dark-theme");
+        toggle.checked = false;
+      }
     }
+  }
 }
 
 function changeTheme() {
-    let body = document.querySelector('body');
-    body.classList.toggle('dark-theme');
+  /**
+   * Updates the Current Theme
+   */
+  let body = document.querySelector("body");
+  body.classList.toggle("dark-theme");
 
-    if (body.classList.contains("dark-theme")) {
-        localStorage.setItem("dark-theme", "on");
-    } else {
-        localStorage.setItem("dark-theme", "off");
-    }
+  if (body.classList.contains("dark-theme")) {
+    localStorage.setItem("dark-theme", "on");
+    document.getElementById("score-goal-box").style.color = "#fff";
+  } else {
+    localStorage.setItem("dark-theme", "off");
+    document.getElementById("score-goal-box").style.color = "#000000";
+  }
 }
+
 function updateHighestScore(score) {
-    if (score > highestScore) highestScore = score;
-    highestScoreEl.textContent = highestScore;
+  /**
+   * Update the Highest score and view on the GameBoard
+   */
+  if (score > highestScore) highestScore = score;
+  highestScoreEl.textContent = highestScore;
 }
