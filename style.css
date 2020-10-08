@@ -65,12 +65,11 @@ body.dark-theme .wrapper {
     background-color: #222;
 }
 
-.player-0-panel,
-.player-1-panel {
+.player-panel {
     width: 50%;
     float: left;
-    height: 600px;
-    padding: 100px;
+    height: 400px;
+    padding: 30px;
 }
 
 
@@ -95,7 +94,7 @@ body.dark-theme .wrapper {
     font-size: 80px;
     font-weight: 100;
     color: #EB4D4D;
-    margin-bottom: 130px;
+    margin-bottom: 30px;
 }
 
 .active { background-color: #f7f7f7; }
