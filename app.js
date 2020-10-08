@@ -208,7 +208,6 @@ function checkWinner() {
 function changeActiveState() {
     document.querySelector('.player-0-panel').classList.toggle('active');
     document.querySelector('.player-1-panel').classList.toggle('active');
-    document.querySelector('.dice').style.display = 'none'
 }
 
 function looseScore() {
