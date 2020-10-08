@@ -55,6 +55,13 @@ SOFTWARE. -->
                     <div class="player-current-label">Current</div>
                     <div class="player-current-score" id="current-0">0</div>
                 </div>
+                <div class="params-dice">
+                    <span id='player-0-dice-num'>Rolling 1 die</span>
+                    <div>
+                        <input type="checkbox" id="dice-toggle-0" class="checkbox" onclick="toggleNumDice(this, checked);" />
+                        <label for="dice-toggle-0" class="switch"></label>
+                    </div>
+                </div>
             </div>
 
             <div class="player-1-panel">
@@ -64,13 +71,24 @@ SOFTWARE. -->
                     <div class="player-current-label">Current</div>
                     <div class="player-current-score" id="current-1">0</div>
                 </div>
+                <div class="params-dice">
+                    <span id='player-1-dice-num'>Rolling 1 die</span>
+                    <div>
+                        <input type="checkbox" id="dice-toggle-1" class="checkbox" onclick="toggleNumDice(this, checked);" />
+                        <label for="dice-toggle-1" class="switch"></label>
+                    </div>
+                </div>
             </div>
 
             <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
             <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
             <!-- deletion of dice in alt -->
-            <img src="images/dice-5.png" alt="" class="dice">
+            <div class="dice-container">
+              <img src="images/dice-6.png" alt="" id="dice-0" class="dice"></img>
+              <img src="images/dice-5.png" alt="" id="dice-1" class="dice"></img>
+            </div>
+            <!--img src="images/dice-5.png" alt="" class="dice"/ -->
         </div>
 
         <script src="app.js"></script>

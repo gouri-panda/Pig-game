@@ -37,6 +37,8 @@ let activePlayer = 0;
 let doubleSix = false;
 let highestScore = 0;
 let goal = 100;
+let numDicePlayer0 = 1;
+let numDicePlayer1 = 1;
 
 // console.log(dice)
 // document.querySelector("#current-" + activePlayer).textContent = dice
@@ -50,7 +52,9 @@ let newGame = document.querySelector('.btn-new');
 let highestScoreEl = document.querySelector('.highest-score span');
 let x = document.querySelector('#current-' + activePlayer).textContent;
 console.log('x is ' + x);
-document.querySelector('.dice').style.display = 'none';
+//Get all dice elements and hide them
+const dice = document.querySelectorAll('.dice');
+dice.forEach(die => die.style.display = 'none');
 let bottomRoll = document.querySelector('.btn-roll');
 console.log(bottomRoll);
 
@@ -62,34 +66,46 @@ bottomRoll.addEventListener('click', function () {
       goal = parseInt(document.getElementById('score-goal-box').value);
     }
 
-    let dice = Math.floor(Math.random() * 6 + 1);
-    let diceDom = document.querySelector('.dice');
-    diceDom.style.display = 'block';
-    diceDom.src = "images/dice-" + dice + ".png";
-    diceDom.alt = "You rolled :" + dice;
+    //Resets all the dice images before rolling again
+    dice.forEach(die => die.style.display = 'none');
 
-
-    if (dice == 1) {
-        console.log("1 rolled");
-        nextPlayer();
+    //Sets the appropriate number of dice depending on player toggle
+    let numDice;
+    if (activePlayer === 0) {
+      numDice = numDicePlayer0;
     } else {
-        if (dice == 6){
-            if (doubleSix){
-                looseScore()
-            }
-            doubleSix = true
-        }
-        doubleSix = false;
-        activeScores += dice;
-
-        if (activePlayer == 0) {
-            current0.textContent = activeScores;
-        } else {
-            current1.textContent = activeScores;
-        }
-
+      numDice = numDicePlayer1;
     }
 
+    for (let i = 0; i < numDice; i++) {
+      let dice = Math.floor(Math.random() * 6 + 1);
+      //let diceDom = document.querySelector('.dice');
+      let diceDom = document.getElementById(`dice-${i}`);
+      diceDom.style.display = 'block';
+      diceDom.src = `images/dice-${dice}.png`;
+      diceDom.alt = `You rolled : ${dice}` ;
+
+
+      if (dice == 1) {
+          console.log("1 rolled");
+          nextPlayer();
+      } else {
+          if (dice == 6){
+              if (doubleSix){
+                  looseScore()
+              }
+              doubleSix = true
+          }
+          doubleSix = false;
+          activeScores += dice;
+
+          if (activePlayer == 0) {
+              current0.textContent = activeScores;
+          } else {
+              current1.textContent = activeScores;
+          }
+      }
+    }
 });
 
 let buttonHold = document.querySelector('.btn-hold');
@@ -203,6 +219,32 @@ function changeTheme() {
         localStorage.setItem("dark-theme", "off");
     }
 }
+
+function toggleNumDice(item, checked) {
+    switch (item.id) {
+        case 'dice-toggle-0':
+            if (checked) {
+              numDicePlayer0 = 2;
+              document.getElementById('player-0-dice-num').textContent = 'Rolling 2 dice';
+            }
+            else {
+              numDicePlayer0 = 1;
+              document.getElementById('player-0-dice-num').textContent = 'Rolling 1 die';
+            }
+        break;
+        case 'dice-toggle-1':
+            if (checked) {
+              numDicePlayer1 = 2;
+              document.getElementById('player-1-dice-num').textContent = 'Rolling 2 dice';
+            }
+            else {
+              numDicePlayer1 = 1;
+              document.getElementById('player-1-dice-num').textContent = 'Rolling 1 die';
+            }
+        break;
+    }
+}
+
 function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;
     highestScoreEl.textContent = highestScore;
