@@ -56,7 +56,6 @@ SOFTWARE. -->
                     <div class="player-current-score" id="current-0">0</div>
                 </div>
             </div>
-
             <div class="player-1-panel">
                 <div class="player-name" id="name-1">Player 2</div>
                 <div class="player-score" id="score-1">0</div>
@@ -76,4 +75,14 @@ SOFTWARE. -->
         <script src="app.js"></script>
     <!-- body ends here -->
     </body>
+    <script>
+        var player0 = prompt("Please enter your name", "Player 1");
+        if (player0 != null) {
+        document.getElementById("name-0").innerHTML =player0;
+        }
+        var player1 = prompt("Please enter your name", "Player 2");
+        if (player1 != null) {
+        document.getElementById("name-1").innerHTML =player1;
+        }
+    </script>
 </html>
