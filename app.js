@@ -94,6 +94,10 @@ function newGame() {
     document.querySelector('.player-0-panel').classList.add('active');
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.dice').style.display = 'none'
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
+    document.querySelector('.btn-roll').addEventListener('click', roll);
+    document.querySelector('.btn-hold').addEventListener('click', hold);
 }
 
 function hold() {
@@ -198,11 +202,18 @@ function checkWinner() {
         document.querySelector('.player-0-panel').classList.add('winner');
         document.querySelector('.player-0-panel').classList.add('active');
         alert("Player 1 is winner")
+        gameOver();
     } else if (scores[1] >= goal) {
         document.querySelector('.player-1-panel').classList.add('winner');
         document.querySelector('.player-1-panel').classList.add('active');
         alert('Player 2 is winner')
+        gameOver();
     }
+}
+
+function gameOver() {
+    document.querySelector('.btn-roll').removeEventListener('click', roll);
+    document.querySelector('.btn-hold').removeEventListener('click', hold);
 }
 
 function changeActiveState() {
