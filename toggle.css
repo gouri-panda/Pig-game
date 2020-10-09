@@ -25,7 +25,7 @@ SOFTWARE. */
   display: inline-block;
   width: 60px;
   height: 30px;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: #e6c8c8;
   border-radius: 20px;
   transition: all 0.3s;
 }
@@ -45,7 +45,7 @@ SOFTWARE. */
   left : 30px;
 }
 .checkbox:checked + .switch {
-  background-color: #EB4D4D;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 .checkbox {
   display : none;

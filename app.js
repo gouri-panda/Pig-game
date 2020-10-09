@@ -23,7 +23,7 @@ SOFTWARE.
 
 GAME RULES:
 
-- The game has 2(+) players, playing in rounds
+- The game has 2 to 4 players, playing in rounds
 - In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
 - BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
@@ -35,6 +35,7 @@ class Player {
     constructor(name) {
         this.name = name;
         this.score = 0;
+        this.numDice = 1;
     }
 
     getName() {
@@ -54,6 +55,13 @@ class Player {
         return this.score;
     }
 
+    getNumDice() {
+        return this.numDice;
+    }
+
+    setNumDice(dice) {
+        this.numDice = dice;
+    }
     toString() {
         return "Player (score: " + this.score + ")";
     }
@@ -63,7 +71,7 @@ console.log("start");
 
 let urlParams = new URLSearchParams(window.location.search);
 let playersParam = parseInt(urlParams.get('players'));
-let numPlayers = playersParam >= 2 && playersParam <= 6 ? playersParam : 2;
+let numPlayers = playersParam >= 2 && playersParam <= 4 ? playersParam : 2;
 let players = [];
 let uiElements = [];
 
@@ -93,8 +101,36 @@ function createPlayerPanel(i) {
     playerCurrentScoreElement.innerText = "0";
 
 
+    let paramsDiceElement = document.createElement("div")
+    paramsDiceElement.setAttribute("class", `params-dice`);
+
+    let paramsDiceLabel = document.createElement("span")
+    paramsDiceLabel.setAttribute("id", `player-${i}-dice-num`);
+    paramsDiceLabel.innerText = 'Rolling 1 dice'
+
+
+    let toggleContainer = document.createElement("div");
+
+    let toggleInput = document.createElement("input")
+    toggleInput.setAttribute("id", `dice-toggle-${i}`);
+    toggleInput.setAttribute("type", "checkbox");
+    toggleInput.setAttribute("class", "checkbox");
+    toggleInput.onclick = (function() {toggleNumDice(i, this.checked);}).bind(toggleInput);
+
+    let toggleLabel = document.createElement("label")
+    toggleLabel.setAttribute("for", `dice-toggle-${i}`);
+    toggleLabel.setAttribute("class", "switch");
+
+    toggleContainer.appendChild(toggleInput);
+    toggleContainer.appendChild(toggleLabel);
+
+    paramsDiceElement.appendChild(paramsDiceLabel);
+    paramsDiceElement.appendChild(toggleContainer);
+
+
     playerBoxElement.appendChild(playerCurrentLabelElement);
     playerBoxElement.appendChild(playerCurrentScoreElement);
+    playerBoxElement.appendChild(paramsDiceElement);
 
     playerPanel.appendChild(playerNameElement);
     playerPanel.appendChild(playerScoreElement);
@@ -129,7 +165,11 @@ let highestScore = 0;
 let goal = 100;
 
 let highestScoreEl = document.querySelector('.highest-score span');
-document.querySelector('.dice').style.display = 'none';
+//Get all dice elements and hide them
+const dice = document.querySelectorAll('.dice');
+dice.forEach(die => die.style.display = 'none');
+let bottomRoll = document.querySelector('.btn-roll');
+console.log(bottomRoll);
 
 checkTheme();
 
@@ -154,6 +194,11 @@ document.querySelector('body').addEventListener('keydown', function (e) {
     }
 });
 
+/**
+ * *****************************
+ * * FUNCTIONS
+ * *****************************
+ **/
 
 function newGame() {
     activeScores = 0;
@@ -187,31 +232,37 @@ function roll() {
         goal = parseInt(document.getElementById('score-goal-box').value);
     }
 
-    let dice = Math.floor(Math.random() * 6 + 1);
-    let diceDom = document.querySelector('.dice');
+    //Resets all the dice images before rolling again
+    dice.forEach(die => die.style.display = 'none');
 
-    diceDom.style.display = 'block';
-    diceDom.src = "images/dice-" + dice + ".png";
-    diceDom.alt = "You rolled :" + dice;
+    //Sets the appropriate number of dice depending on player toggle
+    let numDice = players[activePlayer].getNumDice();
+
+    for (let i = 0; i < numDice; i++) {
+        let dice = Math.floor(Math.random() * 6 + 1);
+        //let diceDom = document.querySelector('.dice');
+        let diceDom = document.getElementById(`dice-${i}`);
+        diceDom.style.display = 'block';
+        diceDom.src = `images/dice-${dice}.png`;
+        diceDom.alt = `You rolled : ${dice}` ;
 
 
-    if (dice === 1) {
-        console.log("1 rolled");
-        nextPlayer();
-    } else {
-        if (dice == 6) {
-            if (doubleSix) {
-                looseScore()
+        if (dice == 1) {
+            console.log("1 rolled");
+            nextPlayer();
+        } else {
+            if (dice == 6){
+                if (doubleSix){
+                    looseScore()
+                }
+                doubleSix = true
             }
-            doubleSix = true
+            doubleSix = false;
+            activeScores += dice;
+
+            uiElements[activePlayer].current.textContent = activeScores;
         }
-        doubleSix = false;
-        activeScores += dice;
-
-        uiElements[activePlayer].current.textContent = activeScores;
-
     }
-
 }
 
 function nextPlayer() {
@@ -242,7 +293,6 @@ function checkWinner() {
 function changeActiveState() {
     document.querySelectorAll('.player-panel').forEach(e => e.classList.remove('active'));
     document.querySelector(`.player-${activePlayer}-panel`).classList.add('active');
-    // document.querySelector('.dice').style.display = 'none'
 }
 
 function looseScore() {
@@ -280,6 +330,13 @@ function changeTheme() {
     } else {
         localStorage.setItem("dark-theme", "off");
     }
+}
+
+function toggleNumDice(playerId, checked) {
+    console.log("toggle", playerId, checked);
+    let numDice = checked ? 2 : 1;
+    players[playerId].setNumDice(numDice);
+    document.getElementById(`player-${playerId}-dice-num`).textContent = numDice == 1 ? 'Rolling 1 dice' : `Rolling ${numDice} dices`;
 }
 
 function updateHighestScore(score) {
