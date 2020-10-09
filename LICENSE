@@ -1,4 +1,4 @@
-/* MIT License
+MIT License
 
 Copyright (c) 2020 Gourishankar panda
 
@@ -18,35 +18,4 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. */
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  transition: all 0.3s;
-}
-.switch::after {
-  content: '';
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border-radius:50%;
-  background-color: white;
-  top: 1px;
-  left: 1px;
-  transition: all 0.3s;
-}
-
-.checkbox:checked + .switch::after {
-  left : 30px;
-}
-.checkbox:checked + .switch {
-  background-color: #EB4D4D;
-}
-.checkbox {
-  display : none;
-}
+SOFTWARE.

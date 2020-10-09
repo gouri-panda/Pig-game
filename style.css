@@ -1,3 +1,24 @@
+/* MIT License
+
+Copyright (c) 2020 Gourishankar panda
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
 /**********************************************
 *** GENERAL
 **********************************************/
@@ -6,7 +27,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 }
 
 .clearfix::after {
@@ -67,6 +88,7 @@ body.dark-theme .wrapper {
     margin-top: 20px;
     margin-bottom: 10px;
     position: relative;
+    font-family:sansa-sarif;
 }
 
 .player-score {
@@ -88,7 +110,7 @@ body.dark-theme .active { background-color: #333; }
     color: #EB4D4D;
     top: -7px;
     right: 10px;
-    
+
 }
 
 .player-current-box {
@@ -148,15 +170,18 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new { top: 75px;}
+.btn-new { top: 100px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
 
-.dice {
+.dice-container {
     position: absolute;
     left: 50%;
     top: 178px;
     transform: translateX(-50%);
+}
+
+.dice {
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
@@ -183,6 +208,18 @@ body.dark-theme .winner { background-color: #333; }
 .params-theme > span {
     margin-bottom: 5px;
 }
+
+.params-dice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.params-dice > span {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
 
 
@@ -200,10 +237,35 @@ body.dark-theme .winner { background-color: #333; }
     text-transform: uppercase;
     font-weight: 300;
 }
-.highest-score span { 
+.highest-score span {
     font-weight: bold;
     color: #EB4D4D;
 }
 .btn-high-score span {
     display: inline;
+}
+
+/************************************************
+*** SCORE GOAL
+*************************************************/
+.score-goal {
+    width: auto;
+    top: 55px;
+    position: absolute;
+    left: 60%;
+    transform: translateX(-50%);
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+input {
+  width: 15%;
+  border: 2px solid red;
+  border-radius: 4px;
+  font-family: Lato;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 300;
 }

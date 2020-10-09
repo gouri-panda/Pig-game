@@ -1,21 +1,45 @@
+<!-- MIT License
+
+Copyright (c) 2020 Gourishankar panda
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <!-- changes in icon -->
+        <link rel = "icon" href ="images/logo-designs/logo-2.png" type = "image/x-icon">
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="style.css">
         <link type="text/css" rel="stylesheet" href="toggle.css">
-        
+        <!-- title of the page -->
         <title>Pig Game</title>
     </head>
-
+    <!-- body started -->
     <body>
         <div class="params-wrapper">
             <div class="params-theme">
                 <span>Switch theme !</span>
                 <div>
-                    <input type="checkbox" id="toggle" class="checkbox" onclick="changeTheme(checked);" />  
+                    <input type="checkbox" id="toggle" class="checkbox" onclick="changeTheme(checked);" />
                     <label for="toggle" class="switch"></label>
                 </div>
             </div>
@@ -23,15 +47,23 @@
 
         <div class="wrapper clearfix">
             <span class="highest-score"><i class="ion-ios-flag"></i>Highest score : <span>0</span></span>
+            <span class="score-goal">Goal: <input type="text" id="score-goal-box" value="100" /> </span>
             <div class="player-0-panel active">
-                <div class="player-name" id="name-0">Player 1</div>
+                <div class="player-name" id="name-0" style="font-color:blue";>Player 1</div><!-- color changed -->
                 <div class="player-score" id="score-0">0</div>
                 <div class="player-current-box">
                     <div class="player-current-label">Current</div>
                     <div class="player-current-score" id="current-0">0</div>
                 </div>
+                <div class="params-dice">
+                    <span id='player-0-dice-num'>Rolling 1 die</span>
+                    <div>
+                        <input type="checkbox" id="dice-toggle-0" class="checkbox" onclick="toggleNumDice(this, checked);" />
+                        <label for="dice-toggle-0" class="switch"></label>
+                    </div>
+                </div>
             </div>
-            
+
             <div class="player-1-panel">
                 <div class="player-name" id="name-1">Player 2</div>
                 <div class="player-score" id="score-1">0</div>
@@ -39,15 +71,28 @@
                     <div class="player-current-label">Current</div>
                     <div class="player-current-score" id="current-1">0</div>
                 </div>
+                <div class="params-dice">
+                    <span id='player-1-dice-num'>Rolling 1 die</span>
+                    <div>
+                        <input type="checkbox" id="dice-toggle-1" class="checkbox" onclick="toggleNumDice(this, checked);" />
+                        <label for="dice-toggle-1" class="switch"></label>
+                    </div>
+                </div>
             </div>
-            
+
             <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
             <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
-            
-            <img src="images/dice-5.png" alt="Dice" class="dice">
+            <!-- deletion of dice in alt -->
+
+            <div class="dice-container">
+              <img src="images/dice-6.png" alt="" id="dice-0" class="dice"></img>
+              <img src="images/dice-5.png" alt="" id="dice-1" class="dice"></img>
+            </div>
+            <!--img src="images/dice-5.png" alt="" class="dice"/ -->
         </div>
-        
+
         <script src="app.js"></script>
+    <!-- body ends here -->
     </body>
 </html>
