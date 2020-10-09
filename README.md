@@ -54,4 +54,4 @@ Find an issue, then solve the issue and make a pull request to the repo. If you 
 ![Alt Text](https://i.imgur.com/hQR9STC.gif)
 
 
-![REsponsive_site](https://github.com/aritrochakraborty29/www.predulive.org/blob/master/img/Pig-Game.gif)
+![REsponsive_site](https://github.com/aritrochakraborty29/www.predulive.org/blob/master/img/20201008-022331.gif)
