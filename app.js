@@ -203,15 +203,20 @@ document.querySelector('body').addEventListener('keydown', function (e) {
 function newGame() {
     activeScores = 0;
     activePlayer = 0;
+    doubleSix = false;
+
+    players.forEach((player, index) => {player.setScore(0);})
     uiElements.forEach((playerUIElements, index) => {
         playerUIElements.current.textContent = '0';
         playerUIElements.total.textContent = '0';
     })
 
-    document.querySelectorAll('.player-panel').forEach(e => e.classList.remove('active'));
+    document.querySelectorAll('.player-panel').forEach(e => e.classList.remove('active', 'winner'));
     document.querySelector('.player-0-panel').classList.add('active');
     document.querySelector('.dice').style.display = 'none'
     document.getElementById('score-goal-box').readOnly = false;
+    document.querySelector('.btn-roll').addEventListener('click', roll);
+    document.querySelector('.btn-hold').addEventListener('click', hold);
 }
 
 function hold() {
@@ -238,22 +243,29 @@ function roll() {
     //Sets the appropriate number of dice depending on player toggle
     let numDice = players[activePlayer].getNumDice();
 
+    let rolls = [];
     for (let i = 0; i < numDice; i++) {
         let dice = Math.floor(Math.random() * 6 + 1);
+        rolls.push(dice);
         //let diceDom = document.querySelector('.dice');
         let diceDom = document.getElementById(`dice-${i}`);
         diceDom.style.display = 'block';
         diceDom.src = `images/dice-${dice}.png`;
         diceDom.alt = `You rolled : ${dice}` ;
+    }
 
-
+    for(let idx in rolls) {
+        let dice = rolls[idx];
         if (dice == 1) {
             console.log("1 rolled");
+            doubleSix = false;
             nextPlayer();
+            break; //do not proceed if the current die roll is 1
         } else {
             if (dice == 6){
                 if (doubleSix){
                     looseScore()
+                    // break; //should we stop here and pass the round for the next player?
                 }
                 doubleSix = true
             }
@@ -270,7 +282,7 @@ function nextPlayer() {
     let score = players[activePlayer].getScore();
     uiElements[activePlayer].total.textContent = score.toString();
     activeScores = 0;
-
+    doubleSix = false;
     uiElements[activePlayer].current.textContent = '0';
     //switch player
     activePlayer = (activePlayer + 1) % numPlayers;
@@ -284,10 +296,16 @@ function checkWinner() {
         let score = player.getScore();
         if (score >= goal) {
             console.log("we have a winner: " + player.getName())
-            uiElements[i].winnerPanel.classList.add('winner');
-            uiElements[i].winnerPanel.classList.add('active');
+            uiElements[i].winnerPanel.classList.add('winner', 'active');
+            alert(`${player.getName()} is winner`)
+            gameOver();
         }
     }
+}
+
+function gameOver() {
+    document.querySelector('.btn-roll').removeEventListener('click', roll);
+    document.querySelector('.btn-hold').removeEventListener('click', hold);
 }
 
 function changeActiveState() {

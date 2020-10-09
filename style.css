@@ -60,6 +60,7 @@ body.dark-theme {
     background-color: #fff;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    min-height: 520px;
 }
 body.dark-theme .wrapper {
     background-color: #222;
