@@ -354,7 +354,7 @@ function toggleNumDice(playerId, checked) {
     console.log("toggle", playerId, checked);
     let numDice = checked ? 2 : 1;
     players[playerId].setNumDice(numDice);
-    document.getElementById(`player-${playerId}-dice-num`).textContent = numDice == 1 ? 'Rolling 1 dice' : `Rolling ${numDice} dices`;
+    document.getElementById(`player-${playerId}-dice-num`).textContent = numDice == 1 ? 'Rolling 1 die' : `Rolling ${numDice} dice`;
 }
 
 function updateHighestScore(score) {
