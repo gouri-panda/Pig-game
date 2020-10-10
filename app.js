@@ -362,4 +362,10 @@ function updateHighestScore(score) {
     highestScoreEl.textContent = highestScore;
 }
 
+
+function toggleRulesModal() {
+    document.querySelector('.wrapper').classList.toggle('blur');
+    document.querySelector('.modal.rules').classList.toggle('hidden');
+}
+
 newGame();
