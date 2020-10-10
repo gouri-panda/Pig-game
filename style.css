@@ -219,6 +219,24 @@ body.dark-theme .winner { background-color: #333; }
 
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
 
+/**********************************************
+*** RULES BUTTON
+**********************************************/
+.params-rules {
+    position: absolute;
+}
+
+.btn-rules {
+    transform: translateX(0);
+    font-size: 1rem;
+    left: 0;
+    width: max-content;
+    margin: 30px 20px;
+}
+
+.btn-rules i {
+    font-size: 1.6rem;
+}
 
 /**********************************************
 *** HIGH SCORE
@@ -240,6 +258,83 @@ body.dark-theme .winner { background-color: #333; }
 }
 .btn-high-score span {
     display: inline;
+}
+
+/**********************************************
+*** MODAL COMPONENT
+**********************************************/
+.modal.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal .modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+    width: max-content;
+    box-shadow: 0 3px 50px #777;
+    max-width: 50%;
+}
+.dark-theme .modal .modal-body {
+    background-color: #333;
+    color: #fff;
+    border: 1px #555 solid;
+    box-shadow: 0 3px 50px #333;
+}
+.dark-theme .modal .modal-body .btn-close {
+    color: #fff;
+}
+.modal .modal-body .title {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    margin: 25px auto 15px;
+    font-size: 1.5rem;
+}
+.modal .modal-body li {
+    position: relative;
+    text-decoration: none;
+    list-style: none;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    padding-left: 10px;
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}
+.modal .modal-body li::before {
+    content: "\2022";
+    font-size: 47px;
+    position: absolute;
+    color: #EB4D4D;
+    top: -21px;
+    left: -25px;
+}
+.modal button.btn-close {
+    position: relative;
+    color: #333;
+}
+
+.modal button.btn-close i {
+    transform: rotate(45deg);
+}
+/**********************************************
+*** UTILITIES
+**********************************************/
+.blur {
+    filter: blur(3px);
+}
+
+.hidden {
+    display: none!important;
 }
 
 /************************************************
@@ -266,3 +361,4 @@ input {
   text-transform: uppercase;
   font-weight: 300;
 }
+

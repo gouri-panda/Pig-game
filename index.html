@@ -43,10 +43,16 @@ SOFTWARE. -->
                     <label for="toggle" class="switch"></label>
                 </div>
             </div>
+        </div>
+
+        <div class="wrapper clearfix">
+            <div class="params-rules">
+                <button class="btn-rules" onclick="toggleRulesModal()"><i class="ion-information-circled"></i>Show rules</button>
+            </div>
             <span class="highest-score"><i class="ion-ios-flag"></i>Highest score : <span>0</span></span>
             <span class="score-goal">Goal: <input type="text" id="score-goal-box" value="100" /> </span>
             <div class="player-0-panel active">
-                <div class="player-name" id="name-0" style="font-color:blue";>Player 1</div><!-- color changed -->
+                <div class="player-name" id="name-0">Player 1</div>
                 <div class="player-score" id="score-0">0</div>
                 <div class="player-current-box">
                     <div class="player-current-label">Current</div>
@@ -87,6 +93,21 @@ SOFTWARE. -->
               <img src="images/dice-5.png" alt="" id="dice-1" class="dice"></img>
             </div>
             <!--img src="images/dice-5.png" alt="" class="dice"/ -->
+        </div>
+
+        <!-- modal for rules reading -->
+        <div class="modal overlay rules hidden">
+            <div class="modal-body">
+                <button class="btn-close" onclick="toggleRulesModal()"><i class="ion-ios-plus-outline"></i>Close</button>
+                <span class="title">PIG GAME RULES</span>
+                <ul>
+                    <li>The game has 2 players, playing in rounds</li>
+                    <li>In each turn, a player rolls a dice as many times as he wishes. Each result get added to his ROUND score</li>
+                    <li>BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn</li>
+                    <li>The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn</li>
+                    <li>The first player to reach 100 points on GLOBAL score wins the game.</li>
+                </ul>
+            </div>
         </div>
 
         <script src="app.js"></script>
