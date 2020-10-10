@@ -106,6 +106,8 @@ newGame.addEventListener('click', function () {
     scores = new Array(playerCount).fill(0);
     activeScores = 0;
     activePlayer = 0;
+    highestScore = 0;
+    highestScoreEl.textContent = '0';
     activeScoreDom.textContent = '0';
     currentScoreDom.textContent = '0';
     generatePlayerList();
