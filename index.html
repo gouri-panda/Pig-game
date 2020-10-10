@@ -23,25 +23,39 @@
 
         <div class="wrapper clearfix">
             <span class="highest-score"><i class="ion-ios-flag"></i>Highest score : <span>0</span></span>
-            <div class="player-0-panel active">
-                <div class="player-name" id="name-0">Player 1</div>
-                <div class="player-score" id="score-0">0</div>
+            <div class="player-list-panel">
+                <div class="player-list" id="players-window">
+                    <div class="player-item" id="player-0">
+                        <div class="player-name" >Player 1</div>
+                        <div class="player-score" id="score-0">0</div>
+                    </div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                    <div class="player-item"></div>
+                </div>
+                <div class="new-game-config">
+                    <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
+                    <div>
+                        <label >players:</label>
+                        <input id="player-count" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="player-panel">
+                <div class="player-name" id="current-player-name">Player 1</div>
+                <div class="player-score" id="current-player-score">0</div>
                 <div class="player-current-box">
                     <div class="player-current-label">Current</div>
-                    <div class="player-current-score" id="current-0">0</div>
+                    <div class="player-current-score" id="current-player-temp-score">0</div>
                 </div>
             </div>
             
-            <div class="player-1-panel">
-                <div class="player-name" id="name-1">Player 2</div>
-                <div class="player-score" id="score-1">0</div>
-                <div class="player-current-box">
-                    <div class="player-current-label">Current</div>
-                    <div class="player-current-score" id="current-1">0</div>
-                </div>
-            </div>
-            
-            <button class="btn-new"><i class="ion-ios-plus-outline"></i>New game</button>
             <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
             

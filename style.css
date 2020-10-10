@@ -44,16 +44,86 @@ body.dark-theme .wrapper {
     background-color: #222;
 }
 
-.player-0-panel,
-.player-1-panel {
+.player-list-panel,
+.player-panel {
     width: 50%;
     float: left;
     height: 600px;
     padding: 100px;
 }
 
+.player-list-panel{
+    box-sizing: border-box;
+    /* border-right: 2px solid black; */
+    padding: 0px;
+}
 
+.player-list {
+    width: 100%;
+    height: 500px;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 10px 10px 0px 10px;
+}
 
+.player-list::-webkit-scrollbar {
+    display:none;
+}
+
+.player-item {
+    width: 100%;
+    height: 100px;
+    background-color: antiquewhite;
+    box-sizing: border-box;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: black;
+}
+
+.player-item.active {
+    background-color: #b4e8b4;
+    color: white;
+}
+
+.player-item.winner {
+    background-color: gold;
+}
+
+.player-item>.player-score {
+    font-size: 60px;
+    text-align: initial;
+    margin: 0px;
+}
+
+.player-item>.player-name {
+    font-size: 30px;
+    position: static;
+    text-align: initial;
+    margin: 0px;
+}
+
+.new-game-config {
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    /* border-top: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.new-game-config>.btn-new {
+    position: static;
+    transform: initial;
+}
+
+.new-game-config input {
+    font: inherit;
+    width: 100px;
+    height: 25px;
+}
 /**********************************************
 *** PLAYERS
 **********************************************/
@@ -114,7 +184,7 @@ body.dark-theme .active { background-color: #333; }
 button {
     position: absolute;
     width: 200px;
-    left: 50%;
+    top: 87%;
     transform: translateX(-50%);
     color: #555;
     background: none;
@@ -148,14 +218,13 @@ i {
     transition: margin 0.3s;
 }
 
-.btn-new { top: 75px;}
-.btn-roll { top: 403px;}
-.btn-hold { top: 467px;}
+.btn-roll { left: 600px;}
+.btn-hold { left: 900px;}
 
 .dice {
     position: absolute;
-    left: 50%;
-    top: 178px;
+    left: 75%;
+    top: 280px;
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
@@ -193,7 +262,7 @@ body.dark-theme .winner { background-color: #333; }
     width: auto;
     top: 25px;
     position: absolute;
-    left: 50%;
+    left: 75%;
     transform: translateX(-50%);
     font-family: Lato;
     font-size: 20px;
