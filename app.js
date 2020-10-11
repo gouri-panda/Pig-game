@@ -36,6 +36,7 @@ class Player {
         this.name = name;
         this.score = 0;
         this.numDice = 1;
+        this.isAI = false;
     }
 
     getName() {
@@ -62,6 +63,15 @@ class Player {
     setNumDice(dice) {
         this.numDice = dice;
     }
+
+    getIsAI() {
+        return this.isAI;
+    }
+
+    setIsAI(isAI) {
+        this.isAI = isAI;
+    }
+
     toString() {
         return "Player (score: " + this.score + ")";
     }
@@ -127,10 +137,37 @@ function createPlayerPanel(i) {
     paramsDiceElement.appendChild(paramsDiceLabel);
     paramsDiceElement.appendChild(toggleContainer);
 
-
     playerBoxElement.appendChild(playerCurrentLabelElement);
     playerBoxElement.appendChild(playerCurrentScoreElement);
     playerBoxElement.appendChild(paramsDiceElement);
+
+    if (i > 0) {
+        let paramsAIElement = document.createElement("div")
+        paramsAIElement.setAttribute("class", `params-dice`);
+
+        let paramsAILabel = document.createElement("span")
+        paramsAILabel.setAttribute("id", `player-${i}-ai-num`);
+        paramsAILabel.innerText = 'AI Player'
+
+        let toggleAIContainer = document.createElement("div");
+
+        let toggleAIInput = document.createElement("input")
+        toggleAIInput.setAttribute("id", `ai-toggle-${i}`);
+        toggleAIInput.setAttribute("type", "checkbox");
+        toggleAIInput.setAttribute("class", "checkbox");
+        toggleAIInput.onclick = (function() {toggleNumAI(i, this.checked);}).bind(toggleAIInput);
+
+        let toggleAILabel = document.createElement("label")
+        toggleAILabel.setAttribute("for", `ai-toggle-${i}`);
+        toggleAILabel.setAttribute("class", "switch");
+
+        toggleAIContainer.appendChild(toggleAIInput);
+        toggleAIContainer.appendChild(toggleAILabel);
+
+        paramsAIElement.appendChild(paramsAILabel);
+        paramsAIElement.appendChild(toggleAIContainer);
+        playerBoxElement.appendChild(paramsAIElement);
+    }
 
     playerPanel.appendChild(playerNameElement);
     playerPanel.appendChild(playerScoreElement);
@@ -277,8 +314,33 @@ function roll() {
     }
 }
 
-function nextPlayer() {
+function turnAI() {
+    const diceFaces = 6;
+    const riskModifier = 0.25;
+    const aiRisk = Math.random();
+    const probabilityOfLoss = (diceFaces - 1) / diceFaces;
+    const maxRolls = Math.floor(Math.log2(aiRisk) / Math.log2(probabilityOfLoss) * riskModifier) + 1;
+    aiRoll(0, maxRolls);
+}
 
+function aiRoll(currentRoll, maxRolls) {
+    const aiPlayer = activePlayer;
+    if (currentRoll >= maxRolls) {
+        hold();
+        return;
+    }
+    roll();
+    if (aiPlayer !== activePlayer) {
+        return;
+    }
+    if (activeScores + players[aiPlayer].getScore() >= goal) {
+        hold();
+        return;
+    }
+    setTimeout(aiRoll, 500, currentRoll+1, maxRolls);
+}
+
+function nextPlayer() {
     let score = players[activePlayer].getScore();
     uiElements[activePlayer].total.textContent = score.toString();
     activeScores = 0;
@@ -288,6 +350,10 @@ function nextPlayer() {
     activePlayer = (activePlayer + 1) % numPlayers;
     //switch active state
     changeActiveState()
+
+    if (players[activePlayer].getIsAI()) {
+        turnAI();
+    }
 }
 
 function checkWinner() {
@@ -355,6 +421,10 @@ function toggleNumDice(playerId, checked) {
     let numDice = checked ? 2 : 1;
     players[playerId].setNumDice(numDice);
     document.getElementById(`player-${playerId}-dice-num`).textContent = numDice == 1 ? 'Rolling 1 die' : `Rolling ${numDice} dice`;
+}
+
+function toggleNumAI(playerId, checked) {
+    players[playerId].setIsAI(checked);
 }
 
 function updateHighestScore(score) {
