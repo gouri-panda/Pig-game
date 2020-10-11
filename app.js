@@ -80,12 +80,13 @@ function newGame() {
     score1.textContent = '0';
     current0.textContent = '0';
     current1.textContent = '0';
-    var r = confirm("Would you like to change the name of players?");
+    r = confirm('Would you like to change the name of players?');
     if (r == true) {
-        var person = prompt("Please enter your name", player0);
-        document.getElementById("name-0").innerHTML =person;
-        var person2 = prompt("Please enter your name", player1);
-        document.getElementById("name-1").innerHTML =person2;
+        person0 = prompt('Please enter your name', player0);
+        document.getElementById('name-0').innerHTML = person0;
+        
+        person1 = prompt('Please enter your name', player1);
+        document.getElementById('name-1').innerHTML = person1;
     }
     document.querySelector('.player-0-panel').classList.add('active');
     document.querySelector('.player-1-panel').classList.remove('active');
