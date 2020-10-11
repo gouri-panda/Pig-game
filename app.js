@@ -314,8 +314,33 @@ function roll() {
     }
 }
 
-function nextPlayer() {
+function turnAI() {
+    const diceFaces = 6;
+    const riskModifier = 0.25;
+    const aiRisk = Math.random();
+    const probabilityOfLoss = (diceFaces - 1) / diceFaces;
+    const maxRolls = Math.floor(Math.log2(aiRisk) / Math.log2(probabilityOfLoss) * riskModifier) + 1;
+    aiRoll(0, maxRolls);
+}
 
+function aiRoll(currentRoll, maxRolls) {
+    const aiPlayer = activePlayer;
+    if (currentRoll >= maxRolls) {
+        hold();
+        return;
+    }
+    roll();
+    if (aiPlayer !== activePlayer) {
+        return;
+    }
+    if (activeScores + players[aiPlayer].getScore() >= goal) {
+        hold();
+        return;
+    }
+    setTimeout(aiRoll, 500, currentRoll+1, maxRolls);
+}
+
+function nextPlayer() {
     let score = players[activePlayer].getScore();
     uiElements[activePlayer].total.textContent = score.toString();
     activeScores = 0;
@@ -325,6 +350,10 @@ function nextPlayer() {
     activePlayer = (activePlayer + 1) % numPlayers;
     //switch active state
     changeActiveState()
+
+    if (players[activePlayer].getIsAI()) {
+        turnAI();
+    }
 }
 
 function checkWinner() {
