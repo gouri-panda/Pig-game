@@ -2,7 +2,7 @@
 
 Pig-game(ludo) is a classic board game played between friends and family. Play the dice game of kings! Recall your childhood!
 
-
+<!-- Game Rules :-  -->
 ## GAME RULES:
 
 - The game has 2 (default) to 4 players, playing in rounds
