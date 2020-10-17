@@ -23,6 +23,7 @@
 
         <div class="wrapper clearfix">
             <span class="highest-score"><i class="ion-ios-flag"></i>Highest score : <span>0</span></span>
+            <span class="score-goal" >Goal: <input class="goal-input" type="text" id="score-goal-box" value="100" /> </span>
             <div class="player-list-panel">
                 <div class="player-list" id="players-window">
                     <div class="player-item" id="player-0">
@@ -58,10 +59,25 @@
             
             <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
-            
+            <button class="btn-rules" onclick="toggleRulesModal()"><i class="ion-information-circled"></i></button>
             <img src="images/dice-5.png" alt="Dice" class="dice">
         </div>
         
+        <!-- modal for rules reading -->
+        <div class="modal overlay rules hidden">
+            <div class="modal-body">
+                <button class="btn-close" onclick="toggleRulesModal()"><i class="ion-ios-plus-outline"></i>Close</button>
+                <span class="title">PIG GAME RULES</span>
+                <ul>
+                    <li>The game has 2 players, playing in rounds</li>
+                    <li>In each turn, a player rolls a dice as many times as he wishes. Each result get added to his ROUND score</li>
+                    <li>BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn</li>
+                    <li>The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn</li>
+                    <li>The first player to reach 100 points on GLOBAL score wins the game.</li>
+                </ul>
+            </div>
+        </div>
+
         <script src="app.js"></script>
     </body>
 </html>

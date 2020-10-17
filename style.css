@@ -151,16 +151,6 @@ body.dark-theme .wrapper {
 body.dark-theme .active { background-color: #333; }
 .active .player-name { font-weight: 300; }
 
-.active .player-name::after {
-    content: "\2022";
-    font-size: 47px;
-    position: absolute;
-    color: #EB4D4D;
-    top: -7px;
-    right: 10px;
-    
-}
-
 .player-current-box {
     background-color: #EB4D4D;
     color: #fff;
@@ -220,16 +210,19 @@ i {
 
 .btn-roll { left: 600px;}
 .btn-hold { left: 900px;}
+.btn-rules{left:98%; top:15px;}
 
-.dice {
+.dice-container {
     position: absolute;
     left: 75%;
     top: 280px;
     transform: translateX(-50%);
+}
+
+.dice {
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
 }
-
 .winner { background-color: #f7f7f7; }
 body.dark-theme .winner { background-color: #333; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
@@ -252,12 +245,45 @@ body.dark-theme .winner { background-color: #333; }
 .params-theme > span {
     margin-bottom: 5px;
 }
+/* 
+.params-dice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.params-dice > span {
+    margin-top: 5px;
+    margin-bottom: 5px;
+} */
+
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
 
 
 /**********************************************
 *** HIGH SCORE
 **********************************************/
+.score-goal {
+    position: absolute;
+    top: 55px;
+    left: 75%;
+    transform: translateX(-50%);
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.goal-input{
+    width: 45px;
+    border: 2px solid red;
+    border-radius: 4px;
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
 .highest-score {
     width: auto;
     top: 25px;
@@ -275,4 +301,81 @@ body.dark-theme .winner { background-color: #333; }
 }
 .btn-high-score span {
     display: inline;
+}
+/**********************************************
+*** MODAL COMPONENT
+**********************************************/
+.modal.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal .modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    background-color: #fff;
+    color: #000;
+    width: max-content;
+    box-shadow: 0 3px 50px #777;
+    max-width: 50%;
+}
+.dark-theme .modal .modal-body {
+    background-color: #333;
+    color: #fff;
+    border: 1px #555 solid;
+    box-shadow: 0 3px 50px #333;
+}
+.dark-theme .modal .modal-body .btn-close {
+    color: #fff;
+}
+.modal .modal-body .title {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    margin: 25px auto 15px;
+    font-size: 1.5rem;
+}
+.modal .modal-body li {
+    position: relative;
+    text-decoration: none;
+    list-style: none;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    padding-left: 10px;
+    font-size: 1.3rem;
+    letter-spacing: 0.1rem;
+}
+.modal .modal-body li::before {
+    content: "\2022";
+    font-size: 47px;
+    position: absolute;
+    color: #EB4D4D;
+    top: -21px;
+    left: -25px;
+}
+.modal button.btn-close {
+    position: relative;
+    color: #333;
+    left: 50%;
+}
+
+.modal button.btn-close i {
+    transform: rotate(45deg);
+}
+/**********************************************
+*** UTILITIES
+**********************************************/
+.blur {
+    filter: blur(3px);
+}
+
+.hidden {
+    display: none!important;
 }

@@ -39,17 +39,12 @@ let activeScores = 0;
 let activePlayer = 0; //index for scores
 let doubleSix = false;
 let highestScore = 0;
+let goal = 100;
 generatePlayerList();
 
 // console.log(dice)
-// document.querySelector("#current-" + activePlayer).textContent = dice
-// document.querySelector('#current-'+ activePlayer).innerHTML = '<em>' + dice + '</em>';
 let activeScoreDom = document.getElementById('current-player-score');
 let currentScoreDom = document.getElementById('current-player-temp-score');
-// let score0 = document.getElementById('score-0');
-// let score1 = document.getElementById('score-1');
-// let current0 = document.getElementById('current-0');
-// let current1 = document.getElementById('current-1');
 let newGame = document.querySelector('.btn-new');
 
 let highestScoreEl = document.querySelector('.highest-score span');
@@ -58,6 +53,11 @@ let bottomRoll = document.querySelector('.btn-roll');
 
 
 bottomRoll.addEventListener('click', function () {
+    if (!document.getElementById('score-goal-box').readOnly) {
+        document.getElementById('score-goal-box').readOnly = true;
+        goal = parseInt(document.getElementById('score-goal-box').value);
+    }
+
     var dice = Math.floor(Math.random() * 6 + 1);
     var diceDom = document.querySelector('.dice');
     diceDom.style.display = 'block';
@@ -87,14 +87,6 @@ buttonHold.addEventListener('click', function () {
     updateHighestScore(scores[activePlayer]);
     checkWinner();
     activeScores = 0;
-    // if (activePlayer == 0) {
-    //     score0.textContent = scores[0].toString();
-    //     current0.textContent = '0'
-    // } else {
-    //     score1.textContent = scores[1].toString();
-    //     current1.textContent = '0'
-    // }
-    //maybe have nextplayer updating UI
     nextPlayer();
 });
 
@@ -112,6 +104,7 @@ newGame.addEventListener('click', function () {
     currentScoreDom.textContent = '0';
     generatePlayerList();
     document.querySelector('.dice').style.display = 'none';
+    document.getElementById('score-goal-box').readOnly = false;
 });
 
 
@@ -133,23 +126,12 @@ function nextPlayer() {
 }
 
 function checkWinner() {
-    // if (scores[0] >= 100) {
-
-    //     // document.querySelector('.player-0-panel').classList.add('winner');
-    //     // document.querySelector('.player-0-panel').classList.add('active')
-    // } else if (scores[1] >= 100) {
-
-    //     // document.querySelector('.player-1-panel').classList.add('winner');
-    //     // document.querySelector('.player-1-panel').classList.add('active')
-    // }
     if(scores[activePlayer] >= 100) {
         document.getElementById('player-' + activePlayer).classList.add('winner');
     }
 }
 
 function changeActiveState(playerIndex) {
-    // document.querySelector('.player-0-panel').classList.toggle('active');
-    // document.querySelector('.player-1-panel').classList.toggle('active');
     if(playerIndex == 0){
         document.getElementById('player-' + (scores.length - 1)).classList.remove('active');
     }else{
@@ -174,4 +156,9 @@ function changeTheme(checked) {
 function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;
     highestScoreEl.textContent = highestScore;
+}
+
+function toggleRulesModal() {
+    document.querySelector('.wrapper').classList.toggle('blur');
+    document.querySelector('.modal.rules').classList.toggle('hidden');
 }
