@@ -40,15 +40,17 @@ let activePlayer = 0; //index for scores
 let doubleSix = false;
 let highestScore = 0;
 let goal = 100;
+let multiDice = false;
+let die = [document.getElementById("dice-0"), document.getElementById("dice-1")];
 generatePlayerList();
 
-// console.log(dice)
+// console.log(die)
 let activeScoreDom = document.getElementById('current-player-score');
 let currentScoreDom = document.getElementById('current-player-temp-score');
 let newGame = document.querySelector('.btn-new');
 
 let highestScoreEl = document.querySelector('.highest-score span');
-document.querySelector('.dice').style.display = 'none';
+die[0].style.display = die[1].style.display = 'none';
 let bottomRoll = document.querySelector('.btn-roll');
 
 
@@ -56,29 +58,51 @@ bottomRoll.addEventListener('click', function () {
     if (!document.getElementById('score-goal-box').readOnly) {
         document.getElementById('score-goal-box').readOnly = true;
         goal = parseInt(document.getElementById('score-goal-box').value);
+        console.log(goal);
     }
 
-    var dice = Math.floor(Math.random() * 6 + 1);
-    var diceDom = document.querySelector('.dice');
-    diceDom.style.display = 'block';
-    diceDom.src = "images/dice-" + dice + ".png";
-    diceDom.alt = "You rolled :" + dice;
+    let s = 0;
+    for(let i = 0; i < 2; i++){
+        let diceVal = Math.floor(Math.random() * 6 + 1);
+        die[i].style.display = "block";
+        die[i].src = "images/dice-" + diceVal + ".png";
+        die[i].alt = "You rolled :" + diceVal;
 
-
-    if (dice == 1) {
-        console.log("1 rolled");
-        nextPlayer();
-    } else {
-        if (dice == 6){
-            if (doubleSix){
-                looseScore();
-            }
-            doubleSix = true
+        if(diceVal == 1){
+            nextPlayer();
+            return;
+        }else{
+            s += diceVal;
         }
-        doubleSix = false;
-        activeScores += dice;
-        currentScoreDom.textContent = activeScores;
+
+        if(!multiDice){
+            break;
+        }
     }
+    activeScores += s;
+    currentScoreDom.textContent = activeScores;
+
+    // var dice = Math.floor(Math.random() * 6 + 1);
+    // var diceDom = document.querySelector('.dice');
+    // diceDom.style.display = 'block';
+    // diceDom.src = "images/dice-" + dice + ".png";
+    // diceDom.alt = "You rolled :" + dice;
+
+
+    // if (dice == 1) {
+    //     console.log("1 rolled");
+    //     nextPlayer();
+    // } else {
+    //     if (dice == 6){
+    //         if (doubleSix){
+    //             looseScore();
+    //         }
+    //         doubleSix = true
+    //     }
+    //     doubleSix = false;
+    //     activeScores += dice;
+    //     currentScoreDom.textContent = activeScores;
+    // }
 
 });
 let buttonHold = document.querySelector('.btn-hold');
@@ -103,7 +127,7 @@ newGame.addEventListener('click', function () {
     activeScoreDom.textContent = '0';
     currentScoreDom.textContent = '0';
     generatePlayerList();
-    document.querySelector('.dice').style.display = 'none';
+    die[0].style.display = die[1].style.display = 'none';
     document.getElementById('score-goal-box').readOnly = false;
 });
 
@@ -117,6 +141,8 @@ function nextPlayer() {
         //switch player
         activePlayer++;
     }
+    multiDice = false;
+    document.getElementById('dice-toggle').checked = false;
     activeScoreDom.textContent = scores[activePlayer].toString();
     activeScores = 0;
     currentScoreDom.textContent = '0';
@@ -126,7 +152,7 @@ function nextPlayer() {
 }
 
 function checkWinner() {
-    if(scores[activePlayer] >= 100) {
+    if(scores[activePlayer] >= goal) {
         document.getElementById('player-' + activePlayer).classList.add('winner');
     }
 }
@@ -138,7 +164,7 @@ function changeActiveState(playerIndex) {
         document.getElementById('player-' + (playerIndex - 1)).classList.remove('active');
     }
     document.getElementById('player-' + playerIndex).classList.add('active');
-    document.querySelector('.dice').style.display = 'none';
+    die[0].style.display = die[1].style.display = 'none';
 }
 
 function looseScore() {
@@ -152,6 +178,14 @@ function looseScore() {
 
 function changeTheme(checked) {
     document.querySelector('body').classList.toggle('dark-theme');
+}
+function toggleDiceCount(){
+    multiDice = !multiDice;
+    if(multiDice == false){
+        die[1].style.display = 'none';
+    }else{
+        die[1].style.display = 'block';
+    }
 }
 function updateHighestScore(score) {
     if (score > highestScore) highestScore = score;

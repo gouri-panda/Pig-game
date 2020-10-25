@@ -1,7 +1,30 @@
+<!-- MIT License
+
+Copyright (c) 2020 Gourishankar panda
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <link rel = "icon" href ="images/logo-designs/logo-2.png" type = "image/x-icon">
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
         <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
         <link type="text/css" rel="stylesheet" href="style.css">
@@ -60,7 +83,16 @@
             <button class="btn-roll"><i class="ion-ios-loop"></i>Roll dice</button>
             <button class="btn-hold"><i class="ion-ios-download-outline"></i>Hold</button>
             <button class="btn-rules" onclick="toggleRulesModal()"><i class="ion-information-circled"></i></button>
-            <img src="images/dice-5.png" alt="Dice" class="dice">
+            <div class='dice-toggle dice-toggler-positioned'>
+                <input type="checkbox" id="dice-toggle" onclick="toggleDiceCount()">
+                <label for="dice-toggle" class="toggle">
+                    <div></div>
+                </label>
+            </div>
+            <div class="dice-container" >
+                <img src="images/dice-5.png" alt="Dice" class="dice" id="dice-0">
+                <img src="images/dice-5.png" alt="Dice" class="dice" id="dice-1">
+            </div>
         </div>
         
         <!-- modal for rules reading -->
