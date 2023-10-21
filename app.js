@@ -368,4 +368,15 @@ function toggleRulesModal() {
     document.querySelector('.modal.rules').classList.toggle('hidden');
 }
 
+function adjustInputWidth(inputElement) {
+    const minWidth = 15;
+    const maxWidth = 30; 
+    const value = inputElement.value;
+
+    const contentWidth = Math.max(minWidth, Math.min(maxWidth, value.length * 5));
+  
+    inputElement.style.width = contentWidth + "%";
+}
+  
+
 newGame();
